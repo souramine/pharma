@@ -18,4 +18,6 @@ Route::get('/', function () {
 Route::get('/started', function () {
     return view('started');
 });
+//---------------Pharmaciens -----------------------
+Route::get('/pharmacien', function () {return view('pharmaciens');});
 

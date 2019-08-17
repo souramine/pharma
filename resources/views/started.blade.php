@@ -5,3 +5,11 @@
 @section('content')
   Contenu Black Page
 @stop
+@section('css')
+  <style type="text/css">
+    #lol{
+      background-color: #32a852;
+      color: white
+      }
+  </style>
+@stop
