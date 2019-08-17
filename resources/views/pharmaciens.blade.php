@@ -124,11 +124,11 @@
 
               <div class="form-group">
                 <label for="">Numéro de téléphone</label>
-                <input type="numero" id="" class="form-control">
+                <input type="number" id="" class="form-control">
               </div>
               <div class="form-group">
                 <label for="">Date de naissance</label>
-                <input type="text" id="inputProjectLeader" class="form-control">
+                <input type="date" id="inputProjectLeader" class="form-control">
               </div>
 
               <div class="form-">
@@ -143,7 +143,7 @@
         <div class="col-md-6">
           <div class="card card-secondary">
             <div class="card-header">
-              <h3 class="card-title">Budget</h3>
+              <h3 class="card-title">Détail</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -186,7 +186,6 @@
                       <label class="custom-control-label" for="customSwitch3"></label>
                       <span style="color: #9b111e" id="info"> 
                       La personne ajoutée aura lui acces a tout les fonctionnalités de l'application ! </span>
-                      
                     </div>
        
               </div>

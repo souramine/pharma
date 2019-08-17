@@ -90,7 +90,7 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-
+      
       <div class="modal fade" id="modal-lg">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -105,7 +105,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-              <button type="button" class="btn btn-primary">Sauvddesdsgarder</button>
+              <button type="button" class="btn btn-primary">Sauvegarder</button>
             </div>
           </div>
           <!-- /.modal-content -->
