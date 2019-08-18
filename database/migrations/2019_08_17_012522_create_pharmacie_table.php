@@ -16,8 +16,8 @@ class CreatePharmacieTable extends Migration
         Schema::create('pharmacies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
-            $table->string('mail', 50);
-            $table->integer('numero');
+            $table->string('mail', 50)->unique();
+            $table->integer('numero')->unique();
             $table->date('naissance', 50);
             $table->string('adresse', 80);
             $table->string('hopital', 30)->default("Centre Hospitalier Tlemcen");
@@ -25,7 +25,7 @@ class CreatePharmacieTable extends Migration
             $table->string('grade', 30)->nullable();
             $table->string('spe', 30)->nullable();
             $table->boolean('admin');
-            $table->string('mdp', 50);
+            $table->string('mdp', 200);
             $table->timestamps();
         });
     }

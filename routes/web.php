@@ -18,6 +18,9 @@ Route::get('/', function () {
 Route::get('/started', function () {
     return view('started');
 });
-//---------------Pharmaciens -----------------------
-Route::get('/pharmacien', function () {return view('pharmaciens');});
+//--------------------------------------Pharmaciens ----------------------------------------------
+Route::resource('pharmacien','PharmacienController');
+Route::get('/salut','PharmacienController@salut');
+Route::post('/deletePharmacien/{id}','PharmacienController@destroy')->name('deletePharmacien');
+Route::post('/addPharmacien','PharmacienController@store')->name('addPharmacien');
 

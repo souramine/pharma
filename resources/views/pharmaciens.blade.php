@@ -15,6 +15,13 @@
               <i class="fas fa-times"></i></button>
           </div>
         </div>
+        @if($pharmaciens->isEmpty())
+          <div class="alert alert-info alert-dismissible" style="text-align: center">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h5><i class="icon fas fa-info"></i> Alert!</h5>
+                  Info alert preview. This alert is dismissable.
+          </div>
+        @else
         <div class="card-body p-2">
           <table class="table table-striped projects" id="example1">
               <thead>
@@ -32,38 +39,50 @@
                           Hopital - Service
                       </th>
                       <th style="width: 15%" class="text-center">
-                          Specialité - Grade
+                          Grade - Specialité
+                      </th>
+                      <th style="width: 1%"class="text-center">
+                          Admin?
                       </th>
                       <th style="width: 30%">
                       </th>
                   </tr>
               </thead>
               <tbody>
+                @foreach ($pharmaciens as $phar)
                   <tr>
                       <td>
-                          #
+                          {{$phar->id}}
                       </td>
                       <td>
-                          BORSALI Nabil
+                          {{$phar->name}}
                           <br/>
                           <small>
-                              01.01.2019 Tlemcen
+                              {{$phar->naissance}} Tlemcen
                           </small>
                       </td>
                       <td>
-                          Abderrahmen@email.com
+                          {{$phar->mail}}
                           <br>
                           <small>
-                              0673299081
+                              {{$phar->numero}}
                           </small>
                       </td>
                       <td>
-                         Centre Hospitalier Tlemcen<br>
-                         <small> Neurologie </small>
+                         {{$phar->hopital}}<br>
+                         <small> {{$phar->service}} </small>
                       </td>
                       <td class="project-state">
-                      	Neurologie<br>
-                          <span class="badge badge-success">Admin</span>
+                      	{{$phar->grade}}<br>
+                         <small> {{$phar->spe}} </small>
+                      </td>
+                      <td>
+                        @if($phar->admin == 0)
+                          <span class="badge badge-danger">Non</span>
+                        @else
+                           <span class="badge badge-success">Oui</span>
+                        @endif
+                        
                       </td>
                       <td class="project-actions text-right">
                           <span class="btn btn-primary btn-sm" style="cursor: pointer;">
@@ -76,21 +95,24 @@
                               </i>
                               Modi
                           </span>
-                          <span class="btn btn-danger btn-sm" onclick="deleteLigne(1)" style="cursor: pointer;">
+                          <span class="btn btn-danger btn-sm" onclick="deleteLigne({{$phar->id}})" style="cursor: pointer;">
                               <i class="fas fa-trash">
                               </i>
                               Supp
                           </span>
                       </td>
                   </tr>
+                  @endforeach
 
               </tbody>
           </table>
         </div>
+        @endif
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-
+<form action="{{ route('addPharmacien') }}" method="post">
+                            {{ csrf_field() }}
            <div class="modal fade" id="modal-lg">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -115,25 +137,25 @@
             <div class="card-body">
             		<div class="form-group">
                 <label for="">Nom Prénom</label>
-                <input type="text" id="" class="form-control">
+                <input type="text" name="name" id="" class="form-control">
               </div>
               <div class="form-group">
                 <label for="">Adresse mail</label>
-                <input type="mail" id="" class="form-control">
+                <input type="mail" name="mail" id="" class="form-control">
               </div>
 
               <div class="form-group">
                 <label for="">Numéro de téléphone</label>
-                <input type="number" id="" class="form-control">
+                <input type="number" name="numero" id="" class="form-control">
               </div>
               <div class="form-group">
                 <label for="">Date de naissance</label>
-                <input type="date" id="inputProjectLeader" class="form-control">
+                <input type="date" name="naissance" id="" class="form-control">
               </div>
 
               <div class="form-">
                 <label for="inputDescription">Adresse</label>
-                <textarea id="" class="form-control" rows="2"></textarea>
+                <textarea id="" name="adresse" class="form-control" rows="2"></textarea>
               </div>
             </div>
             <!-- /.card-body -->
@@ -161,20 +183,20 @@
               </div>
              <div class="form-group">
                 <label for="">Grade</label>
-                <select class="form-control custom-select">
+                <select class="form-control custom-select" name="grade">
                   <option selected disabled>Choisir un grade</option>
-                  <option>je sais pas</option>
-                  <option>Canceled</option>
-                  <option>Success</option>
+                  <option value="je sais pas">je sais pas</option>
+                  <option value="Canceled">Canceled</option>
+                  <option value="Success">Success</option>
                 </select>
               </div>
                <div class="form-group">
                 <label for="">Specialité</label>
-                <select class="form-control custom-select">
+                <select class="form-control custom-select" name="spe">
                   <option selected disabled>Choisir une specialité</option>
-                  <option>Neurologie</option>
-                  <option>Canceled</option>
-                  <option>Success</option>
+                  <option value="Neurologie">Neurologie</option>
+                  <option value="Canceled">Canceled</option>
+                  <option value="Success">Success</option>
                 </select>
               </div>
               
@@ -182,7 +204,7 @@
               	
                     <label for="">Admin ?</label>
                     <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                      <input type="checkbox" class="custom-control-input" id="customSwitch3" onchange="changeEtat()">
+                      <input type="checkbox" name="admin" class="custom-control-input" id="customSwitch3" onchange="changeEtat()">
                       <label class="custom-control-label" for="customSwitch3"></label>
                       <span style="color: #9b111e" id="info"> 
                       La personne ajoutée aura lui acces a tout les fonctionnalités de l'application ! </span>
@@ -199,7 +221,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-              <button type="button" class="btn btn-primary">Sauvegarder</button>
+              <input type="submit" class="btn btn-primary" value="Sauvegarder">
             </div>
           </div>
           <!-- /.modal-content -->
@@ -207,13 +229,16 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+  </form>
 @stop
 
 @section('css')
 	<!-- DataTables -->
 	<link rel="stylesheet" href="{{ asset('/js/datatables/dataTables.bootstrap4.css') }}">
 	<!-- SweetAlert2 -->
-  	<link rel="stylesheet" href="{{ asset('/js/sweetalert2/sweetalert2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/js/sweetalert2/sweetalert2.min.css') }}">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('/js/toastr/toastr.min.css') }}">
 @stop
 
 @section('js')
@@ -222,9 +247,16 @@
 	<script src="{{ asset('js/datatables/dataTables.bootstrap4.js')}}"></script>
 	<!-- SweetAlert2 -->
 	<script src="{{ asset('js/sweetalert2/sweetalert2.min.js')}}"></script>
+  <!-- Toastr -->
+  <script src="{{ asset('js/toastr/toastr.min.js')}}"></script>
 
 	<!-- page script -->
 	<script>
+
+      @if(session('message'))
+          toastr.info('Un email est envoiyée');
+          toastr.success('Pharmacien Ajoutée');
+      @endif
 		//data table
 	  $(function () {
 	    $("#example1").DataTable();
@@ -255,12 +287,12 @@
 		  if (result.value) {
 		        $.ajax({
 		                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-		                url: "/chimio/protocole/"+id,
+		                url: "/deletePharmacien/"+id,
 		                method : "POST",              
 		                success: function(data){                  
 		                  Swal.fire({
 		                    title:'Supprimé!',
-		                    text:'Le protocole a été supprimé..',
+		                    text:'Le pharmacien a été supprimé..',
 		                    type:'success',
 		                     onClose :function () {
 		                        //location.href = '';
@@ -287,8 +319,6 @@
 			}
 			else
 				document.getElementById("info").style.color = "#9b111e";
-			
-
 		}
 
 
