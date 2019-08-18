@@ -95,7 +95,7 @@
                               </i>
                               Modi
                           </span>
-                          <span class="btn btn-danger btn-sm" onclick="deleteLigne({{$phar->id}})" style="cursor: pointer;">
+                          <span class="btn btn-danger btn-sm" style="cursor: pointer;" onclick="deleteLigne({{$phar->id}})">
                               <i class="fas fa-trash">
                               </i>
                               Supp
@@ -286,16 +286,18 @@
 		}).then((result) => {
 		  if (result.value) {
 		        $.ajax({
-		                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-		                url: "/deletePharmacien/"+id,
-		                method : "POST",              
-		                success: function(data){                  
+		                url: "/pharmacien/delete/"+id,
+		                method : "POST",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+		                success: function(data){            
 		                  Swal.fire({
 		                    title:'Supprimé!',
 		                    text:'Le pharmacien a été supprimé..',
 		                    type:'success',
 		                     onClose :function () {
-		                        //location.href = '';
+		                        window.location.reload();
 		                      }
 		                  }                   
 		                  )           
