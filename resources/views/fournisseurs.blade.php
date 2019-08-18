@@ -1,12 +1,12 @@
-@extends('layouts.master', ['titre' => 'Pharmaciens', 
-                            'nomPage' => 'Pharmacologie / Pharmaciens',
-                            'titrePage' => 'Pharmaciens' ])
+@extends('layouts.master', ['titre' => 'Fournisseurs', 
+                            'nomPage' => 'Pharmacologie / Fournisseurs',
+                            'titrePage' => 'Fournisseurs' ])
 
 @section('content')
    <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">List des pharmaciens&nbsp;&nbsp;<button type="button" class="btn  btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal-lg">Ajouter</button></h3>
+           <h3 class="card-title">List des fournisseurs&nbsp;&nbsp;<button type="button" class="btn  btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal-default">Ajouter</button></h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -15,6 +15,13 @@
               <i class="fas fa-times"></i></button>
           </div>
         </div>
+        @if($fournisseurs->isEmpty())
+          <div class="alert alert-info alert-dismissible" style="text-align: center">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h5><i class="icon fas fa-info"></i> Alert!</h5>
+                  Info alert preview. This alert is dismissable.
+          </div>
+        @else
         <div class="card-body p-2">
           <table class="table table-striped projects" id="example1">
               <thead>
@@ -22,48 +29,45 @@
                       <th style="width: 1%">
                           #
                       </th>
-                      <th style="width: 13%">
+                      <th style="width: 20%">
                           Nom - Prénom
                       </th>
-                      <th style="width: 15%">
-                          Email - Tél
+                      <th style="width: 20%">
+                          Date Naissance
                       </th>
-                      <th style="width: 25%">
-                          Hopital - Service
+                      <th style="width: 10%">
+                          Téléphone
                       </th>
-                      <th style="width: 15%" class="text-center">
-                          Specialité - Grade
+                      <th style="width: 9%">
+                          Email
+                      </th>
+                      <th style="width: 10%" class="text-center">
+                          N Registre
                       </th>
                       <th style="width: 30%">
                       </th>
                   </tr>
               </thead>
               <tbody>
+                @foreach ($fournisseurs as $f)
                   <tr>
                       <td>
-                          #
+                          {{$f->id}}
                       </td>
                       <td>
-                          BORSALI Nabil
-                          <br/>
-                          <small>
-                              01.01.2019 Tlemcen
-                          </small>
+                          {{$f->name}}
                       </td>
                       <td>
-                          Abderrahmen@email.com
-                          <br>
-                          <small>
-                              0673299081
-                          </small>
+                          {{$f->naissance}}
                       </td>
                       <td>
-                         Centre Hospitalier Tlemcen<br>
-                         <small> Neurologie </small>
+                          {{$f->numero_tel}}
+                      </td>
+                      <td>
+                         {{$f->mail}}  
                       </td>
                       <td class="project-state">
-                        Neurologie<br>
-                          <span class="badge badge-success">Admin</span>
+                        {{$f->numero_reg}}
                       </td>
                       <td class="project-actions text-right">
                           <span class="btn btn-primary btn-sm" style="cursor: pointer;">
@@ -76,36 +80,80 @@
                               </i>
                               Modi
                           </span>
-                          <span class="btn btn-danger btn-sm" onclick="deleteLigne(1)" style="cursor: pointer;">
+                          <span class="btn btn-danger btn-sm" style="cursor: pointer;" onclick="deleteLigne({{$f->id}})">
                               <i class="fas fa-trash">
                               </i>
                               Supp
                           </span>
                       </td>
                   </tr>
+                  @endforeach
 
               </tbody>
           </table>
         </div>
+        @endif
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-      
-      <div class="modal fade" id="modal-lg">
-        <div class="modal-dialog modal-lg">
+<form action="{{ route('addFournisseur') }}" method="post">
+                            {{ csrf_field() }}
+           <div class="modal fade" id="modal-default">
+        <div class="modal-dialog modal-default">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Ajouter un Pharmacien</h4>
+              <h4 class="modal-title">Ajouter un Fournisseur</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p>One fine body&hellip;</p>
+               <div class="row">
+              <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Tout les champs sont obligatoire</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                <label for="">Nom Prénom</label>
+                <input type="text" name="name" id="" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="">Adresse mail</label>
+                <input type="mail" name="mail" id="" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label for="">Numéro de téléphone</label>
+                <input type="number" name="numero" id="" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="">Date de naissance</label>
+                <input type="date" name="naissance" id="" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="">Numéro de registre de commerce</label>
+                <input type="number" name="numero_reg" id="" class="form-control">
+              </div>
+
+              
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        
+            </div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-              <button type="button" class="btn btn-primary">Sauvegarder</button>
+              <input type="submit" class="btn btn-primary" value="Sauvegarder">
             </div>
           </div>
           <!-- /.modal-content -->
@@ -113,13 +161,16 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+  </form>
 @stop
 
 @section('css')
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('/js/datatables/dataTables.bootstrap4.css') }}">
   <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="{{ asset('/js/sweetalert2/sweetalert2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('/js/sweetalert2/sweetalert2.min.css') }}">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('/js/toastr/toastr.min.css') }}">
 @stop
 
 @section('js')
@@ -128,9 +179,15 @@
   <script src="{{ asset('js/datatables/dataTables.bootstrap4.js')}}"></script>
   <!-- SweetAlert2 -->
   <script src="{{ asset('js/sweetalert2/sweetalert2.min.js')}}"></script>
+  <!-- Toastr -->
+  <script src="{{ asset('js/toastr/toastr.min.js')}}"></script>
 
   <!-- page script -->
   <script>
+
+      @if(session('message'))
+          toastr.success('Fournisseur Ajoutée');
+      @endif
     //data table
     $(function () {
       $("#example1").DataTable();
@@ -160,16 +217,18 @@
     }).then((result) => {
       if (result.value) {
             $.ajax({
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    url: "/chimio/protocole/"+id,
-                    method : "POST",              
-                    success: function(data){                  
+                    url: "/fournisseur/delete/"+id,
+                    method : "POST",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+                    success: function(data){            
                       Swal.fire({
                         title:'Supprimé!',
-                        text:'Le protocole a été supprimé..',
+                        text:'Le fournisseur a été supprimé..',
                         type:'success',
                          onClose :function () {
-                            //location.href = '';
+                            window.location.reload();
                           }
                       }                   
                       )           
@@ -185,6 +244,5 @@
       }
     })
       }
-
   </script>
 @stop

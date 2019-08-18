@@ -17,7 +17,11 @@ Route::get('/', function () {
 
 //--------------------------------------Pharmaciens ----------------------------------------------
 Route::resource('pharmacien','PharmacienController');
-Route::get('/salut','PharmacienController@salut');
 Route::post('/pharmacien/delete/{id}','PharmacienController@destroy');
 Route::post('/addPharmacien','PharmacienController@store')->name('addPharmacien');
+
+//--------------------------------------Fournisseur ----------------------------------------------
+Route::resource('fournisseur','FournisseurController');
+Route::post('/fournisseur/delete/{id}','FournisseurController@destroy');
+Route::post('/addFournisseur','FournisseurController@store')->name('addFournisseur');
 

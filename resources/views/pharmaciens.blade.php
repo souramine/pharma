@@ -29,10 +29,10 @@
                       <th style="width: 1%">
                           #
                       </th>
-                      <th style="width: 13%">
+                      <th style="width: 15%">
                           Nom - Prénom
                       </th>
-                      <th style="width: 15%">
+                      <th style="width: 13%">
                           Email - Tél
                       </th>
                       <th style="width: 25%">

@@ -116,10 +116,4 @@ class PharmacienController extends Controller
         return response()->json(['success'=>true]);
     }
 
-    public function salut(){
-        Mail::send('emails.salutation', ['mdp' => '123'], function($message){
-            $message->to('abderrahmenzenagui@gmail.com')->from('haha@gmail.com')->subject('hi');
-        });
-
-    }
 }
