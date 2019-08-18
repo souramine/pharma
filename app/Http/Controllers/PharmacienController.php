@@ -57,6 +57,16 @@ class PharmacienController extends Controller
 
         $pharmacien->save();
 
+        //envoiyer un mail password a l'utilisateur ajoutée
+        $to_name = strtoupper($request->input('name'));
+        $to_email = $request->input('mail');
+        $data = array('name'=>$to_name, "mdp" => $tmp);
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+        $message->to($to_email, $to_name)
+        ->subject('Password');
+        $message->from('ibrazen7@gmail.com','Password');
+        });
+
         return redirect('pharmacien')->with('message','Pharmacien ajoutée');
     }
 

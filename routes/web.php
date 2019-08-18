@@ -12,12 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/started', function () {
     return view('started');
 });
+
 //--------------------------------------Pharmaciens ----------------------------------------------
 Route::resource('pharmacien','PharmacienController');
 Route::get('/salut','PharmacienController@salut');
