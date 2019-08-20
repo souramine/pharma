@@ -25,3 +25,8 @@ Route::resource('fournisseur','FournisseurController');
 Route::post('/fournisseur/delete/{id}','FournisseurController@destroy');
 Route::post('/addFournisseur','FournisseurController@store')->name('addFournisseur');
 
+//--------------------------------------Medicament ----------------------------------------------
+Route::resource('medicaments','MedicamentController');
+Route::post('/medicaments/delete/{id}','MedicamentController@destroy');
+Route::post('/addMedicaments','MedicamentController@store')->name('addMedicaments');
+
