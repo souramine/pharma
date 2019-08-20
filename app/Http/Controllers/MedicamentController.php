@@ -37,7 +37,19 @@ class MedicamentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $medicament = new Medicament;
+        $medicament->nom = strtoupper($request->input('nom'));
+        $medicament->famille = $request->input('famille');
+        $medicament->voie = $request->input('voie');
+        $medicament->forme = $request->input('forme');
+        $medicament->dosage = $request->input('dosage');
+        $medicament->unite = $request->input('unite');
+        $medicament->volume = $request->input('volume');
+        $medicament->unite_volume = $request->input('unite_vol');
+        $medicament->solvant = $request->input('solvant');
+        $medicament->save();
+
+        return redirect('medicaments')->with('message','Medicament ajoutée');
     }
 
     /**

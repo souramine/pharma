@@ -29,16 +29,16 @@
                       <th style="width: 1%">
                           #
                       </th>
-                      <th style="width: 20%">
+                      <th style="width: 25%">
                           Nom - Famille
                       </th>
-                      <th style="width: 20%">
+                      <th style="width: 10%">
                           Dosage
                       </th>
                       <th style="width: 10%">
                           Forme
                       </th>
-                      <th style="width: 9%">
+                      <th style="width: 10%">
                           Solvant
                       </th>
                       <th style="width: 10%" class="text-center">
@@ -47,7 +47,7 @@
                       <th style="width: 10%" class="text-center">
                           Voie
                       </th>
-                      <th style="width: 30%">
+                      <th style="width: 40%">
                       </th>
                   </tr>
               </thead>
@@ -58,8 +58,9 @@
                           {{$m->id}}
                       </td>
                       <td>
-                          {{$m->nom}}<br>
-                          <small>{{$m->famille}}</small>
+                          {{$m->nom}}
+
+                          (<small>{{$m->famille}}</small>)
                       </td>
                       <td>
                           {{$m->dosage}}&nbsp;{{$m->unite}}
@@ -87,7 +88,7 @@
                               </i>
                               Modi
                           </span>
-                          <span class="btn btn-danger btn-sm" style="cursor: pointer;" onclick="deleteLigne({{$f->id}})">
+                          <span class="btn btn-danger btn-sm" style="cursor: pointer;" onclick="deleteLigne({{$m->id}})">
                               <i class="fas fa-trash">
                               </i>
                               Supp
@@ -129,7 +130,7 @@
             <div class="card-body">
                 <div class="form-group">
                 <label for="">Nom du produit</label>
-                <input type="text" name="name" id="" class="form-control">
+                <input type="text" name="nom" id="" class="form-control">
               </div>
               <div class="form-group" >
                 <label for="">Famille</label>
@@ -252,7 +253,7 @@
   	}
 
       @if(session('message'))
-          toastr.success('Fournisseur Ajoutée');
+          toastr.success('Medicament Ajoutée');
       @endif
     //data table
     $(function () {
@@ -283,7 +284,7 @@
     }).then((result) => {
       if (result.value) {
             $.ajax({
-                    url: "/fournisseur/delete/"+id,
+                    url: "/medicaments/delete/"+id,
                     method : "POST",   
                     data: {
                     "_token": "{{ csrf_token() }}"
@@ -291,7 +292,7 @@
                     success: function(data){            
                       Swal.fire({
                         title:'Supprimé!',
-                        text:'Le fournisseur a été supprimé..',
+                        text:'Le medicament a été supprimé..',
                         type:'success',
                          onClose :function () {
                             window.location.reload();
