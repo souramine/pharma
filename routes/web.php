@@ -30,3 +30,8 @@ Route::resource('medicaments','MedicamentController');
 Route::post('/medicaments/delete/{id}','MedicamentController@destroy');
 Route::post('/addMedicaments','MedicamentController@store')->name('addMedicaments');
 
+//--------------------------------------Achat ----------------------------------------------
+Route::resource('achats','LotController');
+Route::post('/achat/delete/{id}','LotController@destroy');
+Route::post('/addAchat','LotController@store')->name('addAchat');
+

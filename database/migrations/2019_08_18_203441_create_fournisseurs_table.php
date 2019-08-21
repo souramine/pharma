@@ -16,7 +16,7 @@ class CreateFournisseursTable extends Migration
         Schema::create('fournisseurs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
-            $table->date('naissance', 50);
+            $table->date('naissance');
             $table->string('mail', 50)->unique();
             $table->string('numero_tel',15)->unique();
             $table->string('numero_reg',30)->unique();
