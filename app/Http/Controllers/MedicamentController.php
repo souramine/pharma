@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Medicament;
+use DB;
 
 class MedicamentController extends Controller
 {
@@ -96,5 +97,16 @@ class MedicamentController extends Controller
     {
         Medicament::destroy($id);
         return response()->json(['success'=>true]);
+    }
+    public function getMedicamentNom(){
+        $result = array();
+        $sp1 = DB::table('medicaments')
+              ->where('medicaments.nom','LIKE' , '%' . $_POST['phrase'] . '%')
+              ->Orwhere('medicaments.dosage','LIKE' , '%' . $_POST['phrase'] . '%')
+              ->Orwhere('medicaments.unite','LIKE' , '%' . $_POST['phrase'] . '%')
+              ->limit(15)     
+              ->get();
+          $result =  $sp1; 
+          return response()->json($result);
     }
 }

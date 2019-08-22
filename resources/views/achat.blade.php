@@ -15,7 +15,7 @@
               <i class="fas fa-times"></i></button>
           </div>
         </div>
-        @if($medicaments->isEmpty())
+        @if($lots->isEmpty())
           <div class="alert alert-info alert-dismissible" style="text-align: center">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                   <h5><i class="icon fas fa-info"></i> Alert!</h5>
@@ -52,30 +52,30 @@
                   </tr>
               </thead>
               <tbody>
-                @foreach ($medicaments as $m)
+                @foreach ($lots as $l)
                   <tr>
                       <td>
-                          {{$m->id}}
+                          {{$l->id}}
                       </td>
                       <td>
-                          {{$m->nom}}
+                          {{$l->date_fabrication}}
 
-                          (<small>{{$m->famille}}</small>)
+                          (<small>{{$l->famille}}</small>)
                       </td>
                       <td>
-                          {{$m->dosage}}&nbsp;{{$m->unite}}
+                          {{$l->dosage}}&nbsp;{{$l->unite}}
                       </td>
                       <td>
-                          {{$m->forme}}
+                          {{$l->forme}}
                       </td>
                       <td>
-                         {{$m->solvant}}  
+                         {{$l->solvant}}  
                       </td>
                       <td>
-                        {{$m->volume}}&nbsp;{{$m->unite_volume}}
+                        {{$l->volume}}&nbsp;{{$l->unite_volume}}
                       </td>
                       <td>
-                        {{$m->voie}}
+                        {{$l->voie}}
                       </td>
                       <td class="project-actions text-right">
                           <span class="btn btn-primary btn-sm" style="cursor: pointer;">
@@ -88,7 +88,7 @@
                               </i>
                               Modi
                           </span>
-                          <span class="btn btn-danger btn-sm" style="cursor: pointer;" onclick="deleteLigne({{$m->id}})">
+                          <span class="btn btn-danger btn-sm" style="cursor: pointer;" onclick="deleteLigne({{$l->id}})">
                               <i class="fas fa-trash">
                               </i>
                               Supp
@@ -104,13 +104,13 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-<form action="{{ route('addMedicaments') }}" method="post">
+<form action="{{ route('addAchat') }}" method="post">
                             {{ csrf_field() }}
            <div class="modal fade" id="modal-default">
         <div class="modal-dialog modal-default">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Ajouter un Médicament</h4>
+              <h4 class="modal-title">Ajouter un achat</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -128,77 +128,47 @@
               </div>
             </div>
             <div class="card-body">
-                <div class="form-group">
-                <label for="">Nom du produit</label>
-                <input type="text" name="nom" id="" class="form-control">
-              </div>
-              <div class="form-group" >
-                <label for="">Famille</label>
-                <select class="form-control custom-select" name="famille">
-                  <option selected disabled>Choisir une famille</option>
-                  <option value="Antibiotique">Antibiotique</option>
-                  <option value="Canceled">Solution</option>
-                  <option value="Success">Comprimer</option>
-                </select>
-              </div>
-               <div class="form-group" id="">
-                <label for="">Voie</label>
-                <select class="form-control custom-select" name="voie">
-                  <option selected disabled>Choisir une voie</option>
-                  <option value="Orale">Orale</option>
-                  <option value="Canceled">Solution</option>
-                  <option value="Success">Comprimer</option>
-                </select>
+              <div class="form-group">
+                <label for="">Nom du médicament ou nom du DCI</label>
+                <input type="text" name="medicament" id="medicament_nom" class="form-control">
+                <input type="hidden" name="medicament_id" id="medicament_id">
               </div>
               <div class="form-group">
-                <label for="">Forme</label>
-                <select class="form-control custom-select" name="forme" id="forme" onchange="changeForme()">
-                  <option selected disabled>Choisir une forme</option>
-                  <option value="Poudre">Poudre</option>
-                  <option value="Canceled">Solution</option>
-                  <option value="Success">Comprimer</option>
-                </select>
-              </div><br>
+                <label for="">Nom du Fourniseur</label>
+                <input type="text" name="fournisseur" id="fournisseur_nom" class="form-control">
+                <input type="hidden" name="fournisseur_id" id="fournisseur_id">
+              </div>
+             
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Prix Total du produit&nbsp;&nbsp;</label> 
+                    <input type="number" name="prix" style="text-align: center" id="" class="form-control col-md-7">    
+                </div>
+
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Quantité acheter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="number" name="quantite_acheter" style="text-align: center" id="" class="form-control col-md-7">    
+                </div>
+
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Quantité minimum&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="number" name="quantite_minimum" style="text-align: center" id="" class="form-control col-md-7">    
+                </div>
+             
+              
             
 	              <div class="form-group form-inline">
-		                <label for="">Dosage&nbsp;</label> 
-		                <input type="number" name="dosage" style="text-align: center" id="" class="form-control col-md-4">  
-		                <label for="">&nbsp;&nbsp;&nbsp;Unité&nbsp;</label>
-		                
-		               <select class="form-control custom-select col-md-5" name="unite">
-	                  <option selected disabled>Choisir une unité</option>
-	                  <option value="MG">MG</option>
-	                  <option value="KG">KG</option>
-	                  <option value="G">G</option>
-	                </select>
+		                <label for="">&nbsp;&nbsp;&nbsp;Date de fabrication&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+		                <input type="date" name="date_f" style="text-align: center" id="" class="form-control col-md-7">    
 	              </div>
-	
-              
-               <div class="form-group form-inline" hidden="true" id="vol">
-		                <label for="">Volume</label> 
-		                <input type="number" name="volume" style="text-align: center" id="" class="form-control col-md-4">  
-		                <label for="">&nbsp;&nbsp;&nbsp;Unité&nbsp;</label>
-		                
-		               <select class="form-control custom-select col-md-5" name="unite_vol">
-	                  <option selected disabled>Choisir une unité</option>
-	                  <option value="ML">ML</option>
-	                  <option value="KG">KG</option>
-	                  <option value="G">G</option>
-	                </select>
-	              </div>
-	              <div class="form-group" hidden="true" id="sol">
-                <label for="">Solvant</label>
-                <select class="form-control custom-select" name="solvant">
-                  <option selected disabled>Choisir un solvant</option>
-                  <option value="Nacl 0.9%">Nacl 0.9%</option>
-                  <option value="Canceled">Solution</option>
-                  <option value="Success">Comprimer</option>
-                </select>
-              </div>
-              
-              
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Date de péremption&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="date" name="date_p" style="text-align: center" id="" class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Date d'achat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="date" name="date_a" style="text-align: center" id="" class="form-control col-md-7">    
+                </div>
 
-              
             </div>
             <!-- /.card-body -->
           </div>
@@ -227,6 +197,8 @@
   <link rel="stylesheet" href="{{ asset('/js/sweetalert2/sweetalert2.min.css') }}">
   <!-- Toastr -->
   <link rel="stylesheet" href="{{ asset('/js/toastr/toastr.min.css') }}">
+  <!-- jquery-ui.css-->
+  <link rel="stylesheet" href="{{ asset('/css/jquery-ui/jquery-ui.css') }}">
 @stop
 
 @section('js')
@@ -238,22 +210,12 @@
   <!-- Toastr -->
   <script src="{{ asset('js/toastr/toastr.min.js')}}"></script>
 
+  <script src="{{ asset('/js/jquery/jquery-ui.min.js')}}"></script> 
+
   <!-- page script -->
   <script>
-  	//change forme
-  	function changeForme(){
-  		var forme = document.getElementById('forme').value ;
-  		if (forme == 'Poudre') {
-  			document.getElementById('sol').hidden = false;
-  			document.getElementById('vol').hidden = false;
-  		}else{
-  			document.getElementById('sol').hidden = true;
-  			document.getElementById('vol').hidden = true;
-  		}
-  	}
-
       @if(session('message'))
-          toastr.success('Medicament Ajoutée');
+          toastr.success('Achat lot Ajoutée');
       @endif
     //data table
     $(function () {
@@ -284,7 +246,7 @@
     }).then((result) => {
       if (result.value) {
             $.ajax({
-                    url: "/medicaments/delete/"+id,
+                    url: "/achat/delete/"+id,
                     method : "POST",   
                     data: {
                     "_token": "{{ csrf_token() }}"
@@ -292,7 +254,7 @@
                     success: function(data){            
                       Swal.fire({
                         title:'Supprimé!',
-                        text:'Le medicament a été supprimé..',
+                        text:'Le achat a été supprimé..',
                         type:'success',
                          onClose :function () {
                             window.location.reload();
@@ -311,5 +273,76 @@
       }
     })
       }
+        //get médicament name
+        $('input[id="medicament_nom"]').keydown(function() { 
+        $(this).autocomplete({
+          appendTo: $(this).parent(), // selectionner l'element pour ajouter la liste des suggestion
+          source: function( request, response ) {
+              $.ajax( {
+                url: "/medicament",
+                method : "POST",
+                data: {
+                  "_token": "{{ csrf_token() }}",
+                  phrase: request.term // value on field input
+                },
+                success: function( data , status , code ) {
+                    response($.map(data.slice(0, 15), function (item) { // slice cut number of element to show
+                      return {
+                          label : item.nom +" "+ item.dosage+" "+ item.unite, // pour afficher dans la liste des suggestions
+                          value:  item.nom +" "+ item.dosage+" "+ item.unite, // value c la valeur à mettre dans l'input this
+                          id:  item.id // récupérer id du médicament
+                      };
+                  }));
+                }
+              });
+            },// END SOURCE
+            select: function( event, ui ) {
+              $("#medicament_id").attr("value",ui.item.id);
+            }
+
+          }).data("ui-autocomplete")._renderItem = function (ul, item) {//cette method permet de gérer l'affichage de la liste des suggestions
+                 return $("<li style='cursor: pointer;background-color:#d2efee;'></li>")
+                     .data("item.autocomplete", item)//récupérer les donnée de l'autocomplete
+                     //.attr("data-value", item.id )
+                     .append(item.label)//ajouter à la liste de suggestions
+                     .appendTo(ul); 
+                 };
+      });
+
+        //get fournisseur name
+        $('input[id="fournisseur_nom"]').keydown(function() { 
+        $(this).autocomplete({
+          appendTo: $(this).parent(), // selectionner l'element pour ajouter la liste des suggestion
+          source: function( request, response ) {
+              $.ajax( {
+                url: "/fournisseur",
+                method : "POST",
+                data: {
+                  "_token": "{{ csrf_token() }}",
+                  phrase: request.term // value on field input
+                },
+                success: function( data , status , code ) {
+                    response($.map(data.slice(0, 15), function (item) { // slice cut number of element to show
+                      return {
+                          label : item.name +">>>>>"+ item.mail, // pour afficher dans la liste des suggestions
+                          value:  item.name +">>>>>"+ item.mail, // value c la valeur à mettre dans l'input this
+                          id:  item.id // récupérer id du médicament
+                      };
+                  }));
+                }
+              });
+            },// END SOURCE
+            select: function( event, ui ) {
+              $("#fournisseur_id").attr("value",ui.item.id);
+            }
+
+          }).data("ui-autocomplete")._renderItem = function (ul, item) {//cette method permet de gérer l'affichage de la liste des suggestions
+                 return $("<li style='cursor: pointer;'></li>")
+                     .data("item.autocomplete", item)//récupérer les donnée de l'autocomplete
+                     //.attr("data-value", item.id )
+                     .append(item.label)//ajouter à la liste de suggestions
+                     .appendTo(ul); 
+                 };
+      });
   </script>
 @stop

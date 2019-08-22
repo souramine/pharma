@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Fournisseur;
+use DB;
 
 class FournisseurController extends Controller
 {
@@ -91,5 +92,17 @@ class FournisseurController extends Controller
     {
         Fournisseur::destroy($id);
         return response()->json(['success'=>true]);
+    }
+
+    public function getFournisseurNom(){
+        $result = array();
+        $sp1 = DB::table('fournisseurs')
+              ->where('fournisseurs.name','LIKE' , '%' . $_POST['phrase'] . '%')
+              ->Orwhere('fournisseurs.mail','LIKE' , '%' . $_POST['phrase'] . '%')
+              ->Orwhere('fournisseurs.numero_tel','LIKE' , '%' . $_POST['phrase'] . '%')
+              ->limit(15)     
+              ->get();
+          $result =  $sp1; 
+          return response()->json($result);
     }
 }

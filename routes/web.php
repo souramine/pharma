@@ -24,11 +24,13 @@ Route::post('/addPharmacien','PharmacienController@store')->name('addPharmacien'
 Route::resource('fournisseur','FournisseurController');
 Route::post('/fournisseur/delete/{id}','FournisseurController@destroy');
 Route::post('/addFournisseur','FournisseurController@store')->name('addFournisseur');
+Route::post('/fournisseur','FournisseurController@getFournisseurNom');
 
 //--------------------------------------Medicament ----------------------------------------------
 Route::resource('medicaments','MedicamentController');
 Route::post('/medicaments/delete/{id}','MedicamentController@destroy');
 Route::post('/addMedicaments','MedicamentController@store')->name('addMedicaments');
+Route::post('/medicament','MedicamentController@getMedicamentNom');
 
 //--------------------------------------Achat ----------------------------------------------
 Route::resource('achats','LotController');

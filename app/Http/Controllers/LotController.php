@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Lot;
 
 class LotController extends Controller
 {
@@ -13,7 +14,9 @@ class LotController extends Controller
      */
     public function index()
     {
-        return 'lol';
+        $lots = Lot::all();
+        return view('achat',compact('lots'));
+
     }
 
     /**
@@ -34,7 +37,20 @@ class LotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $achat = new lot;
+        $achat->date_fabrication = $request->input('date_f');
+        $achat->date_peremption = $request->input('date_p');
+        $achat->date_achat = $request->input('date_a');
+        $achat->quantite_acheter = $request->input('quantite_acheter');
+        $achat->quantite_restante = $request->input('quantite_acheter');
+        $achat->quantite_minimum = $request->input('quantite_minimum');
+        $achat->prix = $request->input('prix');
+        $achat->pharmacien_id = 9;
+        $achat->fournisseur_id = (int)$request->input('fournisseur_id');
+        $achat->medicament_id = (int)$request->input('medicament_id');
+        $achat->save();
+
+        return redirect('achats')->with('message','achat ajoutée');
     }
 
     /**
@@ -79,6 +95,7 @@ class LotController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Lot::destroy($id);
+        return response()->json(['success'=>true]);
     }
 }
