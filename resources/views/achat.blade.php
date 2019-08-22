@@ -29,69 +29,68 @@
                       <th style="width: 1%">
                           #
                       </th>
-                      <th style="width: 25%">
-                          Nom - Famille
+                      <th style="width: 20%">
+                          Nom de Médicament
+                      </th>
+                      <th style="width: 6%">
+                          Prix
                       </th>
                       <th style="width: 10%">
-                          Dosage
+                          D.d'achat
                       </th>
                       <th style="width: 10%">
-                          Forme
+                          D.péremption
                       </th>
                       <th style="width: 10%">
-                          Solvant
+                          Q.acheter
                       </th>
-                      <th style="width: 10%" class="text-center">
-                          Volume
+                      <th style="width: 10%">
+                          Q.restante
                       </th>
-                      <th style="width: 10%" class="text-center">
-                          Voie
-                      </th>
-                      <th style="width: 40%">
+                      <th style="width: 15%">
                       </th>
                   </tr>
               </thead>
               <tbody>
                 @foreach ($lots as $l)
-                  <tr>
+                  <tr @if($l->quantite_restante <= $l->quantite_minimum)
+                          style="background-color: #ff8d8d"
+                  @endif>
                       <td>
                           {{$l->id}}
                       </td>
+                      <td> <a href="#">
+                          {{DB::table('medicaments')->where('id',$l->medicament_id)->pluck('nom')->first()}}
+                          {{DB::table('medicaments')->where('id',$l->medicament_id)->pluck('dosage')->first()}}
+                          {{DB::table('medicaments')->where('id',$l->medicament_id)->pluck('unite')->first()}}
+                          {{DB::table('medicaments')->where('id',$l->medicament_id)->pluck('forme')->first()}}
+                          {{DB::table('medicaments')->where('id',$l->medicament_id)->pluck('volume')->first()}}
+                          {{DB::table('medicaments')->where('id',$l->medicament_id)->pluck('unite_volume')->first()}}</a>
+                      </td>                  
                       <td>
-                          {{$l->date_fabrication}}
-
-                          (<small>{{$l->famille}}</small>)
+                          {{$l->prix}} DA
                       </td>
                       <td>
-                          {{$l->dosage}}&nbsp;{{$l->unite}}
+                         {{$l->date_achat}}  
                       </td>
                       <td>
-                          {{$l->forme}}
+                        {{$l->date_peremption}}
                       </td>
                       <td>
-                         {{$l->solvant}}  
+                        {{$l->quantite_acheter}}
                       </td>
-                      <td>
-                        {{$l->volume}}&nbsp;{{$l->unite_volume}}
-                      </td>
-                      <td>
-                        {{$l->voie}}
+                       <td>
+                        {{$l->quantite_restante}}
                       </td>
                       <td class="project-actions text-right">
                           <span class="btn btn-primary btn-sm" style="cursor: pointer;">
-                              <i class="fas fa-folder">
-                              </i>
-                              Détail
+                              <i class="fas fa-eye"></i>
                           </span>
                           <span class="btn btn-info btn-sm" style="cursor: pointer;">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Modi
+                              <i class="fas fa-pencil-alt"></i>
                           </span>
                           <span class="btn btn-danger btn-sm" style="cursor: pointer;" onclick="deleteLigne({{$l->id}})">
-                              <i class="fas fa-trash">
-                              </i>
-                              Supp
+                              <i class="fas fa-trash"></i>
                           </span>
                       </td>
                   </tr>
@@ -141,7 +140,7 @@
              
                 <div class="form-group form-inline">
                     <label for="">&nbsp;&nbsp;&nbsp;Prix Total du produit&nbsp;&nbsp;</label> 
-                    <input type="number" name="prix" style="text-align: center" id="" class="form-control col-md-7">    
+                    <input type="number" step="0.01" name="prix" style="text-align: center" id="" class="form-control col-md-7">    
                 </div>
 
                 <div class="form-group form-inline">
