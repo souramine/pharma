@@ -90,7 +90,7 @@
 		                    <td>{{$achat->prix}}</td>
 		                    <td class="text-right py-0 align-middle">
 		                      <div class="btn-group btn-group-sm">
-		                        <button class="btn btn-info"><i class="fas fa-eye"></i></button>
+		                        <button class="btn btn-info" onclick="afficheDetail({{$achat->id}})"><i class="fas fa-eye"></i></button>
 		                        <button class="btn btn-danger" onclick="deleteLigne({{$achat->id}})"><i class="fas fa-trash"></i></button> 
 		                      </div>
 		                    </td>
@@ -144,6 +144,77 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+
+      <div class="modal fade" id="modal-default">
+        <div class="modal-dialog modal-default">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Détail du médicament</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+              <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Détail</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="">Nom du médicament ou nom du DCI</label>
+                <input type="text" id="medicament_nom" class="form-control" disabled>
+              </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Prix Total du produit&nbsp;&nbsp;</label> 
+                    <input type="text" step="0.01" id="prix" style="text-align: center" class="form-control col-md-7" disabled >    
+                </div>
+
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Quantité acheter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" id="quantite_acheter" style="text-align: center" disabled class="form-control col-md-7">    
+                </div>
+
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Quantité minimum&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" id="quantite_minimum" style="text-align: center" disabled class="form-control col-md-7">    
+                </div>
+            
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Date de fabrication&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" id="date_f" style="text-align: center" disabled class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Date de péremption&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" id="date_p" style="text-align: center" disabled class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Date d'achat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" id="date_a" style="text-align: center" disabled class="form-control col-md-7">    
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+            </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-secondary"  data-dismiss="modal">Quitter</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 @stop
 @section('css')
   <!-- SweetAlert2 -->
@@ -243,5 +314,38 @@
       }
     })
       }
+
+  function afficheDetail(id){
+    $.ajax({
+                    url: "/detail/achat/"+id,
+                    method : "get",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+                    success: function(data){   
+                        //alert(Object.keys(data[1])[2]); 
+                        var myModal = $('#modal-default');
+                        document.getElementById('medicament_nom').value = Object.values(data[1])[1] +" "+ Object.values(data[1])[2] +" "+ Object.values(data[1])[3] +" "+Object.values(data[1])[4] +" "+Object.values(data[1])[6] +" "+Object.values(data[1])[7];
+                        document.getElementById('prix').value = Object.values(data[0])[7] ;
+                        document.getElementById('quantite_acheter').value = Object.values(data[0])[4] ;
+                        document.getElementById('quantite_minimum').value = Object.values(data[0])[6] ;
+                        document.getElementById('date_f').value = Object.values(data[0])[1] ;
+                        document.getElementById('date_p').value = Object.values(data[0])[2] ;
+                        document.getElementById('date_a').value = Object.values(data[0])[3] ;
+
+                        myModal.modal({ show: true });        
+                                
+                    },
+                    error: function(data){
+                        Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'Quelque chose a mal tourné!'
+                        })
+                      }
+                  }); 
+        
+
+  }
   </script>
 @stop

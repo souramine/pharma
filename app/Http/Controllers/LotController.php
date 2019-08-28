@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lot;
+use App\Models\Medicament;
+
 
 class LotController extends Controller
 {
@@ -97,5 +99,12 @@ class LotController extends Controller
     {
         Lot::destroy($id);
         return response()->json(['success'=>true]);
+    }
+
+    function getDetailLot($id){
+        $lot = Lot::find($id);
+        $medicament = Medicament::find($lot->medicament_id);
+        //dd($lot);
+        return [$lot, $medicament];
     }
 }

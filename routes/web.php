@@ -37,4 +37,5 @@ Route::post('/medicament','MedicamentController@getMedicamentNom');
 Route::resource('achats','LotController');
 Route::post('/achat/delete/{id}','LotController@destroy');
 Route::post('/addAchat','LotController@store')->name('addAchat');
+Route::get('/detail/achat/{id}','LotController@getDetailLot')->name('detailL');
 
