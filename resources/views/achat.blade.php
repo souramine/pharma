@@ -81,6 +81,9 @@
                       </td>
                        <td>
                         {{$l->quantite_restante}}
+                        @if($l->quantite_restante <= $l->quantite_minimum)  
+                         &nbsp;&nbsp;<span class="badge badge-danger">Epuisé</span>
+                        @endif
                       </td>
                       <td class="project-actions text-right">
                           <span class="btn btn-primary btn-sm" style="cursor: pointer;">

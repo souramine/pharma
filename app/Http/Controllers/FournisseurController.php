@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Fournisseur;
 use DB;
+use App\Models\Lot;
+use Carbon\Carbon;
 
 class FournisseurController extends Controller
 {
@@ -104,5 +106,29 @@ class FournisseurController extends Controller
               ->get();
           $result =  $sp1; 
           return response()->json($result);
+    }
+
+    public function getDetailFournisseur($id){
+        $fourniseur = Fournisseur::find($id);
+        $list_achats = Lot::where('fournisseur_id',$id)->get(); 
+       
+        $month = Carbon::now()->month;
+        $subMonth= Carbon::now()->month - 1 ;
+        $prix_month = 0 ; 
+        $prix_subMonth = 0 ;
+        $nbrAchat_month = 0 ;
+        $nbrAchat_subbMonth = 0 ;
+
+        foreach ($list_achats as  $achat) {
+            if ((int)explode('-', $achat->date_achat)[1] == $month) {
+                $nbrAchat_month ++ ;
+                $prix_month += $achat->prix;
+            }
+            elseif ((int)explode('-', $achat->date_achat)[1] == $subMonth) {
+                $nbrAchat_subbMonth ++ ;
+                $prix_subMonth += $achat->prix;
+            }
+        }
+        return view('details.fournisseur',compact('fourniseur','list_achats','nbrAchat_month','nbrAchat_subbMonth','prix_month','prix_subMonth'));
     }
 }

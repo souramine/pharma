@@ -25,6 +25,7 @@ Route::resource('fournisseur','FournisseurController');
 Route::post('/fournisseur/delete/{id}','FournisseurController@destroy');
 Route::post('/addFournisseur','FournisseurController@store')->name('addFournisseur');
 Route::post('/fournisseur','FournisseurController@getFournisseurNom');
+Route::get('/detail/fournisseur/{id}','FournisseurController@getDetailFournisseur')->name('detailF');
 
 //--------------------------------------Medicament ----------------------------------------------
 Route::resource('medicaments','MedicamentController');
