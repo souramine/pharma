@@ -290,8 +290,8 @@
                 success: function( data , status , code ) {
                     response($.map(data.slice(0, 15), function (item) { // slice cut number of element to show
                       return {
-                          label : item.nom +" "+ item.dosage+" "+ item.unite, // pour afficher dans la liste des suggestions
-                          value:  item.nom +" "+ item.dosage+" "+ item.unite, // value c la valeur à mettre dans l'input this
+                          label : item.nom +" "+ item.dosage+""+ item.unite+ " "+item.forme+" "+item.volume+""+item.unite_volume, // pour afficher dans la liste des suggestions
+                          value:  item.nom +" "+ item.dosage+""+ item.unite+ " "+item.forme+" "+item.volume+""+item.unite_volume, // value c la valeur à mettre dans l'input this
                           id:  item.id // récupérer id du médicament
                       };
                   }));

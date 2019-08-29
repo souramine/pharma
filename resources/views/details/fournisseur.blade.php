@@ -87,7 +87,7 @@
 		                    </td>
 		                    <td>{{$achat->quantite_acheter}}</td>
 		                    <td>{{$achat->date_achat}}</td>
-		                    <td>{{$achat->prix}}</td>
+		                    <td>{{$achat->prix}} DA</td>
 		                    <td class="text-right py-0 align-middle">
 		                      <div class="btn-group btn-group-sm">
 		                        <button class="btn btn-info" onclick="afficheDetail({{$achat->id}})"><i class="fas fa-eye"></i></button>
@@ -123,14 +123,14 @@
               <h5 class="mt-5 text-muted">Détail information</h5>
               <ul class="list-unstyled">
                 <li>
-                  <span href="" class="btn-link text-secondary"><i class="fas fa-envelope"></i>&nbsp;{{$fourniseur->mail}}</span>
+                  <span href="" class="btn-link text-secondary"><i class="fas fa-envelope"></i>&nbsp;&nbsp;{{$fourniseur->mail}}</span>
                 </li>
                 <li>
-                  <span href="" class="btn-link text-secondary"><i class="fas fa-phone-alt"></i>&nbsp;{{$fourniseur->numero_tel}}</span>
+                  <span href="" class="btn-link text-secondary"><i class="fas fa-phone-alt"></i>&nbsp;&nbsp;{{$fourniseur->numero_tel}}</span>
                 </li>
                 
                 <li>
-                  <span class="btn-link text-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp;{{$fourniseur->naissance}} Tlemcen</span>
+                  <span class="btn-link text-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;{{$fourniseur->naissance}} Tlemcen</span>
                 </li>
                 
               </ul>
@@ -326,7 +326,7 @@
                         //alert(Object.keys(data[1])[2]); 
                         var myModal = $('#modal-default');
                         document.getElementById('medicament_nom').value = Object.values(data[1])[1] +" "+ Object.values(data[1])[2] +" "+ Object.values(data[1])[3] +" "+Object.values(data[1])[4] +" "+Object.values(data[1])[6] +" "+Object.values(data[1])[7];
-                        document.getElementById('prix').value = Object.values(data[0])[7] ;
+                        document.getElementById('prix').value = Object.values(data[0])[7] +" DA" ;
                         document.getElementById('quantite_acheter').value = Object.values(data[0])[4] ;
                         document.getElementById('quantite_minimum').value = Object.values(data[0])[6] ;
                         document.getElementById('date_f').value = Object.values(data[0])[1] ;
