@@ -11,4 +11,8 @@ class Medicament extends Model
     public function lots(){
         return $this->hasMany('App\Models\Lot');
     }
+
+    public function ventes(){
+        return $this->hasMany('App\Models\Vente');
+    }
 }
