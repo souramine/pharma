@@ -8,7 +8,7 @@ class Vente extends Model
 {
     protected $table = 'vente';
 
-    public function medicaments(){
+    public function lots(){
         return $this->belongsTo('App\Models\Medicament');
     }
 

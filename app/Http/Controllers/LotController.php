@@ -18,7 +18,6 @@ class LotController extends Controller
     {
         $lots = Lot::all();
         return view('achat',compact('lots'));
-
     }
 
     /**

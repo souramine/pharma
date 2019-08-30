@@ -19,4 +19,8 @@ class Lot extends Model
     public function pharmaciens(){
         return $this->belongsTo('App\Models\Pharmacien');
     }
+
+    public function ventes(){
+        return $this->hasMany('App\Models\Vente');
+    }
 }

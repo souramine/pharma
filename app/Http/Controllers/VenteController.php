@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Vente;
 
 class VenteController extends Controller
 {
@@ -13,7 +14,8 @@ class VenteController extends Controller
      */
     public function index()
     {
-        //
+        $ventes = Vente::all();
+        return view('vente',compact('ventes'));
     }
 
     /**
@@ -79,6 +81,7 @@ class VenteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Vente::destroy($id);
+        return response()->json(['success'=>true]);
     }
 }

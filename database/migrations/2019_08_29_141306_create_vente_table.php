@@ -18,12 +18,13 @@ class CreateVenteTable extends Migration
             $table->date('date_vente');
             $table->integer('quantite_vendu');
             $table->float('prix');
+            $table->string('id_prescription',50);
             $table->unsignedInteger('pharmacien_id');
-            $table->unsignedInteger('medicament_id');
+            $table->unsignedInteger('lot_id');
             $table->timestamps();
 
             $table->foreign('pharmacien_id')->references('id')->on('pharmacies')->onDelete('cascade');
-            $table->foreign('medicament_id')->references('id')->on('medicaments')->onDelete('cascade');
+            $table->foreign('lot_id')->references('id')->on('lot')->onDelete('cascade');
         });
     }
 
