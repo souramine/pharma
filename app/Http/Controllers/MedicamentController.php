@@ -98,6 +98,10 @@ class MedicamentController extends Controller
         Medicament::destroy($id);
         return response()->json(['success'=>true]);
     }
+    /**
+     * [getMedicamentNom description]
+     * @return [type] [description]
+     */
     public function getMedicamentNom(){
         $result = array();
         $sp1 = DB::table('medicaments')

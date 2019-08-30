@@ -101,13 +101,13 @@
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
-<form action="{{ route('addAchat') }}" method="post">
+<form action="{{ route('addVente') }}" method="post">
                             {{ csrf_field() }}
            <div class="modal fade" id="modal-default">
         <div class="modal-dialog modal-default">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Ajouter un achat</h4>
+              <h4 class="modal-title">Ajouter une vente</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -130,41 +130,27 @@
                 <input type="text" name="medicament" id="medicament_nom" class="form-control">
                 <input type="hidden" name="medicament_id" id="medicament_id">
               </div>
-              <div class="form-group">
-                <label for="">Nom du Fourniseur</label>
-                <input type="text" name="fournisseur" id="fournisseur_nom" class="form-control">
-                <input type="hidden" name="fournisseur_id" id="fournisseur_id">
-              </div>
-             
                 <div class="form-group form-inline">
-                    <label for="">&nbsp;&nbsp;&nbsp;Prix Total du produit&nbsp;&nbsp;</label> 
+                    <label for="">&nbsp;&nbsp;&nbsp;Prix Total de vente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
                     <input type="number" step="0.01" name="prix" style="text-align: center" id="" class="form-control col-md-7">    
                 </div>
 
                 <div class="form-group form-inline">
-                    <label for="">&nbsp;&nbsp;&nbsp;Quantité acheter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-                    <input type="number" name="quantite_acheter" style="text-align: center" id="" class="form-control col-md-7">    
+                    <label for="">&nbsp;&nbsp;&nbsp;Quantité vendu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="number" name="quantite_vendu" style="text-align: center" id="quantite_vendu" class="form-control col-md-7">    
                 </div>
-
-                <div class="form-group form-inline">
-                    <label for="">&nbsp;&nbsp;&nbsp;Quantité minimum&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-                    <input type="number" name="quantite_minimum" style="text-align: center" id="" class="form-control col-md-7">    
-                </div>
-             
-              
-            
 	              <div class="form-group form-inline">
-		                <label for="">&nbsp;&nbsp;&nbsp;Date de fabrication&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-		                <input type="date" name="date_f" style="text-align: center" id="" class="form-control col-md-7">    
+		                <label for="">&nbsp;&nbsp;&nbsp;Date de vente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+		                <input type="date" name="date_v" style="text-align: center" id="" class="form-control col-md-7">    
 	              </div>
                 <div class="form-group form-inline">
-                    <label for="">&nbsp;&nbsp;&nbsp;Date de péremption&nbsp;&nbsp;&nbsp;</label> 
-                    <input type="date" name="date_p" style="text-align: center" id="" class="form-control col-md-7">    
+                    <label for="">&nbsp;&nbsp;&nbsp;Prescription&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" name="precription" style="text-align: center" id="" class="form-control col-md-7">    
                 </div>
-                <div class="form-group form-inline">
-                    <label for="">&nbsp;&nbsp;&nbsp;Date d'achat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-                    <input type="date" name="date_a" style="text-align: center" id="" class="form-control col-md-7">    
-                </div>
+                <div class="form-">
+                <label for="inputDescription">Remarque</label>
+                <textarea id="" name="remarque" class="form-control" rows="2"></textarea>
+              </div>
 
             </div>
             <!-- /.card-body -->
@@ -294,7 +280,36 @@
               });
             },// END SOURCE
             select: function( event, ui ) {
-              $("#medicament_id").attr("value",ui.item.id);
+              $.ajax({
+                    url: "/vente/checkMedicament/"+ui.item.id,
+                    method : "POST",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+                    success: function(data){
+                    if (data == "rien") {
+                      //$("#medicament_nom").empty();
+                      document.getElementById('medicament_nom').value = '';
+                      Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'Médicament non acheter encore!',
+                          footer: '<a href="{{(route('achats.index'))}}">Achetez un médicament</a>'
+                        })
+                    } 
+                    else{
+                      $("#medicament_id").attr("value",ui.item.id);
+                      document.getElementById("quantite_vendu").placeholder = "quantité restante = "+data;
+                    }                    
+                    },
+                    error: function(data){
+                        Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'Quelque chose a mal tourné!'
+                        })
+                      }
+                  }); 
             }
 
           }).data("ui-autocomplete")._renderItem = function (ul, item) {//cette method permet de gérer l'affichage de la liste des suggestions

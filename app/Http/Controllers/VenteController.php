@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vente;
+use App\Models\Lot;
 
 class VenteController extends Controller
 {
@@ -36,7 +37,8 @@ class VenteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo "string";
+        die();
     }
 
     /**
@@ -83,5 +85,13 @@ class VenteController extends Controller
     {
         Vente::destroy($id);
         return response()->json(['success'=>true]);
+    }
+
+    public function checkMedicament($id){
+        $test = Lot::where('medicament_id',$id)->get();
+        if ($test->isEmpty()) {
+            return "rien";
+        }
+        return $test[0]->quantite_restante;
     }
 }
