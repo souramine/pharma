@@ -29,23 +29,20 @@
                       <th style="width: 1%">
                           #
                       </th>
-                      <th style="width: 20%">
+                      <th style="width: 30%">
                           Nom de Médicament
+                      </th>
+                      <th style="width: 20%">
+                          Id.prescription
                       </th>
                       <th style="width: 6%">
                           Prix
                       </th>
                       <th style="width: 10%">
-                          D.d'achat
+                          Q.vendu
                       </th>
                       <th style="width: 10%">
-                          D.péremption
-                      </th>
-                      <th style="width: 10%">
-                          Q.acheter
-                      </th>
-                      <th style="width: 10%">
-                          Q.restante
+                          D.vente
                       </th>
                       <th style="width: 15%">
                       </th>
@@ -58,28 +55,57 @@
                           {{$v->id}}
                       </td>
                       <td> <a href="#">
-                          {{DB::table('medicaments')->where('id',$v->medicament_id)->pluck('nom')->first()}}
-                          {{DB::table('medicaments')->where('id',$v->medicament_id)->pluck('dosage')->first()}}
-                          {{DB::table('medicaments')->where('id',$v->medicament_id)->pluck('unite')->first()}}
-                          {{DB::table('medicaments')->where('id',$v->medicament_id)->pluck('forme')->first()}}
-                          {{DB::table('medicaments')->where('id',$v->medicament_id)->pluck('volume')->first()}}
-                          {{DB::table('medicaments')->where('id',$v->medicament_id)->pluck('unite_volume')->first()}}</a>
-                      </td>                  
+                          {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('nom')
+                          ->first()
+                          }}
+                          {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('forme')
+                          ->first()
+                          }}
+                          {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('dosage')
+                          ->first()
+                          }}
+                          {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('unite')
+                          ->first()
+                          }}
+                          {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('volume')
+                          ->first()
+                          }}
+                          {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('unite_volume')
+                          ->first()
+                          }}
+                          </a>
+                      </td>  
+                      <td>
+                        {{$v->id_prescription}}
+                      </td>                
                       <td>
                           {{$v->prix}} DA
                       </td>
                       <td>
-                         {{$v->date_achat}}  
+                         {{$v->quantite_vendu}}  
                       </td>
                       <td>
-                        {{$v->date_peremption}}
+                        {{$v->date_vente}}
                       </td>
-                      <td>
-                        {{$v->quantite_acheter}}
-                      </td>
-                       <td>
-                        {{$v->quantite_restante}}
-                      </td>
+                       
                       <td class="project-actions text-right">
                           <span class="btn btn-primary btn-sm" style="cursor: pointer;">
                               <i class="fas fa-eye"></i>
@@ -145,7 +171,7 @@
 	              </div>
                 <div class="form-group form-inline">
                     <label for="">&nbsp;&nbsp;&nbsp;Prescription&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-                    <input type="text" name="precription" style="text-align: center" id="" class="form-control col-md-7">    
+                    <input type="text" name="id_prescription" style="text-align: center" id="" class="form-control col-md-7">    
                 </div>
                 <div class="form-">
                 <label for="inputDescription">Remarque</label>
@@ -198,7 +224,7 @@
   <!-- page script -->
   <script>
       @if(session('message'))
-          toastr.success('Achat lot Ajoutée');
+          toastr.success('vente ajoutée');
       @endif
     //data table
     $(function () {
@@ -229,7 +255,7 @@
     }).then((result) => {
       if (result.value) {
             $.ajax({
-                    url: "/achat/delete/"+id,
+                    url: "/vente/delete/"+id,
                     method : "POST",   
                     data: {
                     "_token": "{{ csrf_token() }}"
@@ -237,7 +263,7 @@
                     success: function(data){            
                       Swal.fire({
                         title:'Supprimé!',
-                        text:'Le achat a été supprimé..',
+                        text:'Le vente a été supprimé..',
                         type:'success',
                          onClose :function () {
                             window.location.reload();
@@ -298,8 +324,8 @@
                         })
                     } 
                     else{
-                      $("#medicament_id").attr("value",ui.item.id);
-                      document.getElementById("quantite_vendu").placeholder = "quantité restante = "+data;
+                      $("#medicament_id").attr("value",data[1]);
+                      document.getElementById("quantite_vendu").placeholder = "quantité restante = "+data[0];
                     }                    
                     },
                     error: function(data){

@@ -42,7 +42,7 @@ Route::get('/detail/achat/{id}','LotController@getDetailLot')->name('detailL');
 //--------------------------------------Vente ----------------------------------------------
 Route::resource('ventes','VenteController');
 Route::post('/vente/checkMedicament/{id}','VenteController@checkMedicament');
-//Route::post('/achat/delete/{id}','LotController@destroy');
+Route::post('/vente/delete/{id}','VenteController@destroy');
 Route::post('/addVente','VenteController@store')->name('addVente');
 //Route::get('/detail/achat/{id}','LotController@getDetailLot')->name('detailL');
 

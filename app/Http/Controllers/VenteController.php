@@ -37,8 +37,23 @@ class VenteController extends Controller
      */
     public function store(Request $request)
     {
-        echo "string";
-        die();
+        //add vente
+        $vente = new vente;
+        $vente->date_vente = $request->input('date_v');
+        $vente->quantite_vendu = $request->input('quantite_vendu');
+        $vente->prix = $request->input('prix');
+        $vente->id_prescription = $request->input('id_prescription');
+        $vente->remarque = $request->input('remarque');
+        $vente->pharmacien_id = 9;
+        $vente->lot_id = $request->input('medicament_id');
+        $vente->save();
+
+        //update quantite_restante in achat table 
+        $lot = Lot::find($request->input('medicament_id'));
+        $lot->quantite_restante -= $request->input('quantite_vendu');
+        $lot->save();
+
+        return redirect('ventes')->with('message','vente ajoutée');
     }
 
     /**
@@ -92,6 +107,6 @@ class VenteController extends Controller
         if ($test->isEmpty()) {
             return "rien";
         }
-        return $test[0]->quantite_restante;
+        return [$test[0]->quantite_restante, $test[0]->id];
     }
 }

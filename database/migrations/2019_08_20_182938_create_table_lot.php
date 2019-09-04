@@ -22,6 +22,7 @@ class CreateTableLot extends Migration
             $table->integer('quantite_restante');
             $table->integer('quantite_minimum')->default(0);
             $table->float('prix');
+            $table->string('remarque',200)->nullable();
             $table->unsignedInteger('pharmacien_id');
             $table->unsignedInteger('fournisseur_id');
             $table->unsignedInteger('medicament_id');
