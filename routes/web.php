@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('started');
 });
 
+Route::get('/login', function () {
+    return view('login.login');
+});
+
+
+
 //--------------------------------------Pharmaciens ----------------------------------------------
 Route::resource('pharmacien','PharmacienController');
 Route::post('/pharmacien/delete/{id}','PharmacienController@destroy');
