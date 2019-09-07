@@ -5,7 +5,7 @@
       Que ton aliment soit ta seule médecine !
     </div>
     <!-- Default to the left -->
-    <strong>  Copyright &copy; 2019-2020 <a href="#">Universite Tlemcen</a>.</strong> Touts droits réservés.
+    <strong>  Copyright &copy; 2019-2020 <a href="https://www.univ-tlemcen.dz/fr" target="_blank">Universite Tlemcen</a>.</strong> Touts droits réservés.
     <!-- REQUIRED SCRIPTS -->
 	<!-- jQuery -->
 	<script src="{{ asset('js/jquery/jquery.min.js')}}"></script>

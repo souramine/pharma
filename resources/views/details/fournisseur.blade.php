@@ -198,6 +198,14 @@
                     <label for="">&nbsp;&nbsp;&nbsp;Date d'achat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
                     <input type="text" id="date_a" style="text-align: center" disabled class="form-control col-md-7">    
                 </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Acheter par&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <a href="" disabled style="text-align: center;background-color: #b6fcd5" id="pharmacien_view" class="form-control col-md-7"> </a>   
+                </div>
+                <div class="form-group">
+                <label for="inputDescription">Remarque</label>
+                <textarea id="remarque_view"  disabled name="" class="form-control" rows="2"></textarea>
+              </div>
 
             </div>
             <!-- /.card-body -->
@@ -332,6 +340,9 @@
                         document.getElementById('date_f').value = Object.values(data[0])[1] ;
                         document.getElementById('date_p').value = Object.values(data[0])[2] ;
                         document.getElementById('date_a').value = Object.values(data[0])[3] ;
+                        document.getElementById('remarque_view').value = Object.values(data[0])[8] ;
+                        document.getElementById('pharmacien_view').innerHTML = Object.values(data[3])[1] ;
+                        document.getElementById("pharmacien_view").href = "/detail/pharmacien/"+Object.values(data[3])[0];
 
                         myModal.modal({ show: true });        
                                 

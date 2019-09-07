@@ -117,7 +117,7 @@ class PharmacienController extends Controller
     }
 
     public function getDetailPharmacien($id){
-        #ici
+        return view('details.pharmacien');
     }
 
 }
