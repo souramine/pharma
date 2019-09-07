@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lot;
 use App\Models\Medicament;
+use App\Models\Fournisseur;
 
 
 class LotController extends Controller
@@ -47,6 +48,7 @@ class LotController extends Controller
         $achat->quantite_minimum = $request->input('quantite_minimum');
         $achat->prix = $request->input('prix');
         $achat->pharmacien_id = 9;
+        $achat->remarque = $request->input('remarque');
         $achat->fournisseur_id = (int)$request->input('fournisseur_id');
         $achat->medicament_id = (int)$request->input('medicament_id');
         $achat->save();
@@ -102,7 +104,8 @@ class LotController extends Controller
 
     function getDetailLot($id){
         $lot = Lot::find($id);
+        $fournisseur = Fournisseur::find($lot->fournisseur_id);
         $medicament = Medicament::find($lot->medicament_id);
-        return [$lot, $medicament];
+        return [$lot,$fournisseur,$medicament];
     }
 }

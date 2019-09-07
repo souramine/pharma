@@ -173,7 +173,7 @@
                     <label for="">&nbsp;&nbsp;&nbsp;Prescription&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
                     <input type="text" required name="id_prescription" style="text-align: center" id="" class="form-control col-md-7">    
                 </div>
-                <div class="form-">
+                <div class="form-group">
                 <label for="inputDescription">Remarque</label>
                 <textarea id="" name="remarque" class="form-control" rows="2"></textarea>
               </div>
