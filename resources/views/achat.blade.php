@@ -224,7 +224,7 @@
               </div>
               <div class="form-group">
                 <label for="">Nom du Fourniseur</label>
-                <a href=""  disabled  id="fournisseur_nom_view" class="form-control" style="background-color: #99d2fc"></a>
+                <a href=""  disabled  id="fournisseur_nom_view" class="form-control" style="text-align: center ;background-color: #99d2fc"></a>
               </div>
              
                 <div class="form-group form-inline">
@@ -452,16 +452,21 @@
                         }
                         else
                            document.getElementById("color").style = "";
-                         
-                        /*document.getElementById('medicament_nom_view').value = Object.values(data[3])[1] +" "+ Object.values(data[3])[4] +" "+ Object.keys(data[3])[2] +" "+Object.values(data[3])[3] +" "+Object.values(data[3])[6] +" "+Object.values(data[3])[7];
-                        document.getElementById('prix_view').value = Object.values(data[0])[3] +" DA" ;
-                        document.getElementById('quantite_vendu_view').value = Object.values(data[0])[2] ;
-                        document.getElementById('dateV_view').value = Object.values(data[0])[1] ;
-                        document.getElementById('prescription_view').value = Object.values(data[0])[4] ;
-                        document.getElementById('remarque_view').value = Object.values(data[0])[5] ;
-                        document.getElementById('pharmacien_view').innerHTML = Object.values(data[1])[1] ;
 
-                        document.getElementById("pharmacien_view").href = "/detail/pharmacien/"+Object.values(data[1])[0];*/
+                        document.getElementById('medicament_nom_view').value = Object.values(data[2])[1] +" "+ Object.values(data[2])[2] +" "+Object.values(data[2])[3] +" "+ Object.values(data[2])[4] +" "+Object.values(data[2])[6] +" "+Object.values(data[2])[7];
+                        document.getElementById('prix_view').value = Object.values(data[0])[7] +" DA" ;
+                        document.getElementById('quantite_acheter_view').value = Object.values(data[0])[4] ;
+                        document.getElementById('quantite_minimum_view').value = Object.values(data[0])[6] ;
+                        document.getElementById('date_f_view').value = Object.values(data[0])[1] ;
+                        document.getElementById('date_p_view').value = Object.values(data[0])[2] ;
+                        document.getElementById('date_a_view').value = Object.values(data[0])[3] ;
+                        document.getElementById('remarque_view').value = Object.values(data[0])[8] ;
+
+                        document.getElementById('fournisseur_nom_view').innerHTML = Object.values(data[1])[1] ;
+                        document.getElementById("fournisseur_nom_view").href = "/detail/fournisseur/"+Object.values(data[1])[0];
+
+                        document.getElementById('pharmacien_view').innerHTML = Object.values(data[3])[1] ;
+                        document.getElementById("pharmacien_view").href = "/detail/pharmacien/"+Object.values(data[3])[0];
 
                         myModal.modal({ show: true });        
                                 

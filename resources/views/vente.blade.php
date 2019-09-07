@@ -64,12 +64,6 @@
                           {{DB::table('medicaments')
                           ->join('lot','medicaments.id','lot.medicament_id')
                           ->where('lot.id',$v->lot_id)
-                          ->pluck('forme')
-                          ->first()
-                          }}
-                          {{DB::table('medicaments')
-                          ->join('lot','medicaments.id','lot.medicament_id')
-                          ->where('lot.id',$v->lot_id)
                           ->pluck('dosage')
                           ->first()
                           }}
@@ -77,6 +71,12 @@
                           ->join('lot','medicaments.id','lot.medicament_id')
                           ->where('lot.id',$v->lot_id)
                           ->pluck('unite')
+                          ->first()
+                          }}
+                           {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('forme')
                           ->first()
                           }}
                           {{DB::table('medicaments')
@@ -464,7 +464,7 @@
                     success: function(data){   
                         //alert(Object.keys(data[1])[2]); 
                         var myModal = $('#modal-view');
-                        document.getElementById('medicament_nom_view').value = Object.values(data[3])[1] +" "+ Object.values(data[3])[4] +" "+ Object.keys(data[3])[2] +" "+Object.values(data[3])[3] +" "+Object.values(data[3])[6] +" "+Object.values(data[3])[7];
+                        document.getElementById('medicament_nom_view').value = Object.values(data[3])[1] +" "+ Object.values(data[3])[2] +" "+Object.values(data[3])[3] +" "+ Object.values(data[3])[4] +" "+Object.values(data[3])[6] +" "+Object.values(data[3])[7];
                         document.getElementById('prix_view').value = Object.values(data[0])[3] +" DA" ;
                         document.getElementById('quantite_vendu_view').value = Object.values(data[0])[2] ;
                         document.getElementById('dateV_view').value = Object.values(data[0])[1] ;

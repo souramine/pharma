@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Lot;
 use App\Models\Medicament;
 use App\Models\Fournisseur;
+use App\Models\Pharmacien;
 
 
 class LotController extends Controller
@@ -105,7 +106,8 @@ class LotController extends Controller
     function getDetailLot($id){
         $lot = Lot::find($id);
         $fournisseur = Fournisseur::find($lot->fournisseur_id);
+        $pharmacien = Pharmacien::find($lot->pharmacien_id);
         $medicament = Medicament::find($lot->medicament_id);
-        return [$lot,$fournisseur,$medicament];
+        return [$lot,$fournisseur,$medicament,$pharmacien];
     }
 }
