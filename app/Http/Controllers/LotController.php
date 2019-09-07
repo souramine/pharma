@@ -103,7 +103,6 @@ class LotController extends Controller
     function getDetailLot($id){
         $lot = Lot::find($id);
         $medicament = Medicament::find($lot->medicament_id);
-        //dd($lot);
         return [$lot, $medicament];
     }
 }

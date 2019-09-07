@@ -107,7 +107,7 @@
                       </td>
                        
                       <td class="project-actions text-right">
-                          <span class="btn btn-primary btn-sm" style="cursor: pointer;">
+                          <span class="btn btn-primary btn-sm" onclick="afficheDetail({{$v->id}})" style="cursor: pointer;">
                               <i class="fas fa-eye"></i>
                           </span>
                           <span class="btn btn-info btn-sm" style="cursor: pointer;">
@@ -153,25 +153,25 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="">Nom du médicament ou nom du DCI</label>
-                <input type="text" name="medicament" id="medicament_nom" class="form-control">
+                <input type="text" required name="medicament" id="medicament_nom" class="form-control">
                 <input type="hidden" name="medicament_id" id="medicament_id">
               </div>
                 <div class="form-group form-inline">
                     <label for="">&nbsp;&nbsp;&nbsp;Prix Total de vente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-                    <input type="number" step="0.01" name="prix" style="text-align: center" id="" class="form-control col-md-7">    
+                    <input type="number"  required step="0.01" name="prix" style="text-align: center" id="" class="form-control col-md-7">    
                 </div>
 
                 <div class="form-group form-inline">
                     <label for="">&nbsp;&nbsp;&nbsp;Quantité vendu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-                    <input type="number" name="quantite_vendu" style="text-align: center" id="quantite_vendu" class="form-control col-md-7">    
+                    <input type="number" required name="quantite_vendu" style="text-align: center" id="quantite_vendu" class="form-control col-md-7">    
                 </div>
 	              <div class="form-group form-inline">
 		                <label for="">&nbsp;&nbsp;&nbsp;Date de vente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-		                <input type="date" name="date_v" style="text-align: center" id="" class="form-control col-md-7">    
+		                <input type="date" required name="date_v" style="text-align: center" id="" class="form-control col-md-7">    
 	              </div>
                 <div class="form-group form-inline">
                     <label for="">&nbsp;&nbsp;&nbsp;Prescription&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-                    <input type="text" name="id_prescription" style="text-align: center" id="" class="form-control col-md-7">    
+                    <input type="text" required name="id_prescription" style="text-align: center" id="" class="form-control col-md-7">    
                 </div>
                 <div class="form-">
                 <label for="inputDescription">Remarque</label>
@@ -197,6 +197,76 @@
       </div>
       <!-- /.modal -->
   </form>
+
+  <div class="modal fade" id="modal-view">
+        <div class="modal-dialog modal-default">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Détail de la vente</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+              <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Détail</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              
+              <div class="form-group">
+                <label for="">Nom du médicament ou nom du DCI</label>
+                <input type="text" disabled name="" id="medicament_nom_view" class="form-control">
+              </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Prix Total de vente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text"  disabled name="" style="text-align: center" id="prix_view" class="form-control col-md-7">    
+                </div>
+
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Quantité vendu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" disabled name="" style="text-align: center" id="quantite_vendu_view" class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Date de vente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" disabled name="" style="text-align: center" id="dateV_view" class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Prescription&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" disabled name="id_prescription" style="text-align: center" id="prescription_view" class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Vente ajouter par&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <a href="" disabled style="text-align: center;background-color: #b6fcd5" id="pharmacien_view" class="form-control col-md-7"> </a>   
+                </div>
+                <div class="form-">
+                <label for="inputDescription">Remarque</label>
+                <textarea id="remarque_view" disabled name="" class="form-control" rows="2"></textarea>
+              </div>
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+            </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-secondary"  data-dismiss="modal">Quitter</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 @stop
 
 @section('css')
@@ -224,7 +294,7 @@
   <!-- page script -->
   <script>
       @if(session('message'))
-          toastr.success('vente ajoutée');
+          toastr.success('Vente ajoutée');
       @endif
     //data table
     $(function () {
@@ -382,5 +452,41 @@
                      .appendTo(ul); 
                  };
       });
+
+
+        function afficheDetail(id){
+    $.ajax({
+                    url: "/detail/vente/"+id,
+                    method : "get",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+                    success: function(data){   
+                        //alert(Object.keys(data[1])[2]); 
+                        var myModal = $('#modal-view');
+                        document.getElementById('medicament_nom_view').value = Object.values(data[3])[1] +" "+ Object.values(data[3])[4] +" "+ Object.keys(data[3])[2] +" "+Object.values(data[3])[3] +" "+Object.values(data[3])[6] +" "+Object.values(data[3])[7];
+                        document.getElementById('prix_view').value = Object.values(data[0])[3] +" DA" ;
+                        document.getElementById('quantite_vendu_view').value = Object.values(data[0])[2] ;
+                        document.getElementById('dateV_view').value = Object.values(data[0])[1] ;
+                        document.getElementById('prescription_view').value = Object.values(data[0])[4] ;
+                        document.getElementById('remarque_view').value = Object.values(data[0])[5] ;
+                        document.getElementById('pharmacien_view').innerHTML = Object.values(data[1])[1] ;
+
+                        document.getElementById("pharmacien_view").href = "/detail/pharmacien/"+Object.values(data[1])[0];
+
+                        myModal.modal({ show: true });        
+                                
+                    },
+                    error: function(data){
+                        Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'Quelque chose a mal tourné!'
+                        })
+                      }
+                  }); 
+        
+
+  }
   </script>
 @stop

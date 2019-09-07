@@ -116,4 +116,8 @@ class PharmacienController extends Controller
         return response()->json(['success'=>true]);
     }
 
+    public function getDetailPharmacien($id){
+
+    }
+
 }

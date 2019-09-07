@@ -25,6 +25,7 @@ Route::get('/login', function () {
 Route::resource('pharmacien','PharmacienController');
 Route::post('/pharmacien/delete/{id}','PharmacienController@destroy');
 Route::post('/addPharmacien','PharmacienController@store')->name('addPharmacien');
+Route::get('/detail/pharmacien/{id}','PharmacienController@getDetailPharmacien')->name('detailP');
 
 //--------------------------------------Fournisseur ----------------------------------------------
 Route::resource('fournisseur','FournisseurController');
@@ -50,5 +51,6 @@ Route::resource('ventes','VenteController');
 Route::post('/vente/checkMedicament/{id}','VenteController@checkMedicament');
 Route::post('/vente/delete/{id}','VenteController@destroy');
 Route::post('/addVente','VenteController@store')->name('addVente');
+Route::get('/detail/vente/{id}','VenteController@afficheDetail')->name('detailV');
 //Route::get('/detail/achat/{id}','LotController@getDetailLot')->name('detailL');
 

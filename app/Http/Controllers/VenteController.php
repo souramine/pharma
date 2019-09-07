@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Vente;
 use App\Models\Lot;
+use App\Models\Medicament;
+use App\Models\Pharmacien;
 
 class VenteController extends Controller
 {
@@ -108,5 +110,14 @@ class VenteController extends Controller
             return "rien";
         }
         return [$test[0]->quantite_restante, $test[0]->id];
+    }
+
+    public function afficheDetail($id){
+        $vente = Vente::find($id);
+        $pharmacien = Pharmacien::find($vente->pharmacien_id);
+        $lot = Lot::find($vente->lot_id);
+        $medicament = Medicament::find($lot->medicament_id);
+
+        return [$vente,$pharmacien,$lot,$medicament];
     }
 }
