@@ -78,7 +78,7 @@
                 	@foreach($list_achats->sortByDesc('prix') as $achat)
 		                <tr>
 		                    <td>
-		                      {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('nom')->first()}}
+		                        {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('nom')->first()}}
 	                          {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('dosage')->first()}}
 	                          {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('unite')->first()}}
 	                          {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('forme')->first()}}
@@ -325,7 +325,7 @@
                     success: function(data){   
                         //alert(Object.keys(data[1])[2]); 
                         var myModal = $('#modal-default');
-                        document.getElementById('medicament_nom').value = Object.values(data[1])[1] +" "+ Object.values(data[1])[2] +" "+ Object.values(data[1])[3] +" "+Object.values(data[1])[4] +" "+Object.values(data[1])[6] +" "+Object.values(data[1])[7];
+                        document.getElementById('medicament_nom').value = Object.values(data[2])[1] +" "+ Object.values(data[2])[2] +" "+ Object.values(data[2])[3] +" "+Object.values(data[2])[4] +" "+Object.values(data[2])[6] +" "+Object.values(data[2])[7];
                         document.getElementById('prix').value = Object.values(data[0])[7] +" DA" ;
                         document.getElementById('quantite_acheter').value = Object.values(data[0])[4] ;
                         document.getElementById('quantite_minimum').value = Object.values(data[0])[6] ;
