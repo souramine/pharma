@@ -85,11 +85,11 @@
                         
                       </td>
                       <td class="project-actions text-right">
-                          <span class="btn btn-primary btn-sm" style="cursor: pointer;">
+                          <a class="btn btn-primary btn-sm" style="cursor: pointer; color: white" href="{{route('detailP',$phar->id)}}">
                               <i class="fas fa-folder">
                               </i>
                               Détail
-                          </span>
+                          </a>
                           <span class="btn btn-info btn-sm" style="cursor: pointer;">
                               <i class="fas fa-pencil-alt">
                               </i>

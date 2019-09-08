@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\Pharmacien;
+use App\Models\Lot;
+use Carbon\Carbon;
+use App\Models\Vente;
 
 class PharmacienController extends Controller
 {
@@ -117,7 +120,45 @@ class PharmacienController extends Controller
     }
 
     public function getDetailPharmacien($id){
-        return view('details.pharmacien');
+        $pharmacien = Pharmacien::find($id);
+        $list_achats = Lot::where('pharmacien_id',$id)->get(); 
+        $list_achats_vente = Vente::where('pharmacien_id',$id)->get(); 
+
+        $month = Carbon::now()->month;
+        $subMonth= Carbon::now()->month - 1 ;
+        $prix_month = 0 ; 
+        $prix_subMonth = 0 ;
+        $nbrAchat_month = 0 ;
+        $nbrAchat_subbMonth = 0 ;
+
+        $prix_month_vente = 0 ; 
+        $prix_subMonth_vente= 0 ;
+        $nbrVente_month = 0 ;
+        $nbrVente_subbMonth = 0 ;
+
+        foreach ($list_achats as  $achat) {
+            if ((int)explode('-', $achat->date_achat)[1] == $month) {
+                $nbrAchat_month ++ ;
+                $prix_month += $achat->prix;
+            }
+            elseif ((int)explode('-', $achat->date_achat)[1] == $subMonth) {
+                $nbrAchat_subbMonth ++ ;
+                $prix_subMonth += $achat->prix;
+            }
+        }
+
+        foreach ($list_achats_vente as  $vente) {
+            if ((int)explode('-', $vente->date_vente)[1] == $month) {
+                $nbrVente_month ++ ;
+                $prix_month_vente += $vente->prix;
+            }
+            elseif ((int)explode('-', $vente->date_vente)[1] == $subMonth) {
+                $nbrVente_subbMonth ++ ;
+                $prix_subMonth_vente += $vente->prix;
+            }
+        }
+
+        return view('details.pharmacien',compact('pharmacien','list_achats','nbrAchat_month','nbrAchat_subbMonth','prix_month','prix_subMonth','prix_month_vente','prix_subMonth_vente','nbrVente_month','nbrVente_subbMonth','list_achats_vente'));
     }
 
 }

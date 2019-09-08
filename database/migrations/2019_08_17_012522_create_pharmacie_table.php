@@ -17,7 +17,7 @@ class CreatePharmacieTable extends Migration
             $table->increments('id');
             $table->string('name', 50);
             $table->string('mail', 50)->unique();
-            $table->integer('numero')->unique();
+            $table->string('numero',20)->unique();
             $table->date('naissance', 50);
             $table->string('adresse', 80);
             $table->string('hopital', 30)->default("Centre Hospitalier Tlemcen");

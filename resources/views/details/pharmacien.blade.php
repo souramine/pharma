@@ -15,55 +15,55 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-12 col-md-12 col-lg-9 order-2 order-md-1">
+            <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
               <div class="row">
-                <div class="col-12 col-sm-4" style="background-color : #cce8fd">
+                <div class="col-12 col-sm-4" >
                   <div class="info-box bg-light">
                     <div class="info-box-content" >
                       <span class="info-box-text text-center text-muted">Achat ce mois-ci</span>
-                      <span class="info-box-number text-center text-muted mb-0">25</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{$nbrAchat_month}} ({{$prix_month}} DA)</span>
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-4" style="background-color : #cce8fd">
+                <div class="col-12 col-sm-4" >
                   <div class="info-box bg-light">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Achat le mois passée</span>
-                      <span class="info-box-number text-center text-muted mb-0">54<span>
+                      <span class="info-box-number text-center text-muted mb-0">{{$nbrAchat_subbMonth}} ({{$prix_subMonth}} DA)<span>
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-4" style="background-color : #cce8fd">
+                <div class="col-12 col-sm-4" >
                   <div class="info-box bg-light">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Achat Total</span>
-                      <span class="info-box-number text-center text-muted mb-0">55</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{$list_achats->count()}} ({{$list_achats->sum('prix')}} DA)</span>
                     </div>
                   </div>
                 </div>
 
 
-                <div class="col-12 col-sm-4" style="background-color : #b6fcd5">
+                <div class="col-12 col-sm-4" >
                   <div class="info-box bg-light" >
                     <div class="info-box-content"  >
                       <span class="info-box-text text-center text-muted">Vente ce mois-ci</span>
-                      <span class="info-box-number text-center text-muted mb-0">25</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{$nbrVente_month}} ({{$prix_month_vente}} DA)</span>
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-4" style="background-color : #b6fcd5">
+                <div class="col-12 col-sm-4" >
                   <div class="info-box bg-light">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Vente le mois passée</span>
-                      <span class="info-box-number text-center text-muted mb-0">54<span>
+                      <span class="info-box-number text-center text-muted mb-0">{{$nbrVente_subbMonth}} ({{$prix_subMonth_vente}} DA)<span>
                     </div>
                   </div>
                 </div>
-                <div class="col-12 col-sm-4" style="background-color : #b6fcd5">
+                <div class="col-12 col-sm-4" >
                   <div class="info-box bg-light">
                     <div class="info-box-content">
                       <span class="info-box-text text-center text-muted">Vente Total</span>
-                      <span class="info-box-number text-center text-muted mb-0">55</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{$list_achats_vente->count()}} ({{$list_achats_vente->sum('prix')}} DA)</span>
                     </div>
                   </div>
                 </div>
@@ -71,32 +71,38 @@
               </div>
               
             </div>
-            <div class="col-12 col-md-12 col-lg-3 order-1 order-md-2">
-              <h3 class="text-primary"><i class="fas  fa-address-card"></i>&nbsp;sdfdsf</h3>
+            <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+              <h3 class="text-primary"><i class="fas  fa-address-card"></i>&nbsp;{{$pharmacien->name}}
+                @if($pharmacien->admin == 1 )
+                  <span style="color: #7dc008">(ADMIN)</span>
+                @endif
+              </h3>
 
               <ul class="list-unstyled">
                 <li>
-                  <span href="" class="btn-link text-secondary"><i class="fas fa-envelope"></i>&nbsp;&nbsp;dsfdsf</span>
+                  <span href="" class="btn-link text-secondary"><i class="fas fa-hospital-alt"></i>&nbsp;&nbsp;{{$pharmacien->hopital}} ( {{$pharmacien->service}} )</span>
                 </li>
                 <li>
-                  <span href="" class="btn-link text-secondary"><i class="fas fa-phone-alt"></i>&nbsp;&nbsp;dsfdsf</span>
+                  <span class="btn-link text-secondary"><i class="fas fa-file-medical"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{$pharmacien->grade}} ( {{$pharmacien->spe}})</span>
+                </li>
+                <li>
+                  <span href="" class="btn-link text-secondary"><i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;{{$pharmacien->mail}}</span>
+                </li>
+                <li>
+                  <span href="" class="btn-link text-secondary"><i class="fas fa-phone-alt"></i>&nbsp;&nbsp;&nbsp;{{$pharmacien->numero}}</span>
                 </li>
                 
                 <li>
-                  <span class="btn-link text-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;dsfdsfTlemcen</span>
+                  <span class="btn-link text-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp; {{$pharmacien->naissance}} Tlemcen</span>
                 </li>
 
-                <li>
-                  <span class="btn-link text-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;dsfdsfTlemcen</span>
-                </li>
-                <li>
-                  <span class="btn-link text-secondary"><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;dsfdsfTlemcen</span>
-                </li>
+                
+               
                 
               </ul>
               <div class="text-center mt-4 mb-0">
                 <button class="btn btn-sm btn-primary">Modifier</button>
-                <button class="btn btn-sm btn-danger" onclick="deleteLignef()">Supprimer le pharmacien</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteLignef({{$pharmacien->id}})">Supprimer le pharmacien</button>
               </div>
             </div>
 
@@ -104,9 +110,16 @@
 
           </div>
           <br>
-          <div class="col-12 form-inline">
-          <div class="col-6">
+          <div class="col-sm-12">
+          <div class="col-sm-6 " style="position: static;">
                   <h4>List des toutes les achats</h4>
+                  @if($list_achats->isEmpty())
+                    <br>
+                    <div class="alert alert-info alert-dismissible" style="text-align: center">
+                      <h5><i class="icon fas fa-info"></i> Médicaments !</h5>
+                      Info alert preview. This alert is dismissable.
+              </div>
+             @else
                   
                   <div class="card card-info">
                     
@@ -123,21 +136,27 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Nom de médicament</th>
-                    <th>Q.acheter</th>
-                    <th>D.acheter</th>
-                    <th>Prix</th>
+                    <th style="width: 40%" >Nom de médicament</th>
+                    <th style="width: 10%">Q.acheter</th>
+                    <th style="width: 20%">D.acheter</th>
+                    <th style="width: 15%">Prix</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($list_achats->sortByDesc('prix') as $achat)
                     <tr>
                         <td>
-                            jj
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('nom')->first()}}
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('dosage')->first()}}
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('unite')->first()}}
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('forme')->first()}}
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('volume')->first()}}
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('unite_volume')->first()}}
                         </td>
-                        <td>fghfg</td>
-                        <td>fgh</td>
-                        <td>fghgfh</td>
+                         <td>{{$achat->quantite_acheter}}</td>
+                        <td>{{$achat->date_achat}}</td>
+                        <td>{{$achat->prix}} DA</td>
                         <td class="text-right py-0 align-middle">
                           <div class="btn-group btn-group-sm">
                             <button class="btn btn-info" onclick="afficheDetail()"><i class="fas fa-eye"></i></button>
@@ -145,6 +164,7 @@
                           </div>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
               </table>
               
@@ -152,10 +172,18 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
+          @endif
 
                 </div>
-                <div class="col-6">
+                <div class="col-sm-6" style="position: absolute; left: 50%; top: 0%">
                   <h4>List des toutes les ventes</h4>
+                   @if($list_achats->isEmpty())
+                    <br>
+                    <div class="alert alert-info alert-dismissible" style="text-align: center">
+                      <h5><i class="icon fas fa-info"></i> Médicaments !</h5>
+                      Info alert preview. This alert is dismissable.
+              </div>
+             @else
                   
                   <div class="card card-info">
                     
@@ -172,14 +200,15 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Nom de médicament</th>
-                    <th>Q.acheter</th>
-                    <th>D.acheter</th>
-                    <th>Prix</th>
+                    <th style="width: 40%" >Nom de médicament</th>
+                    <th style="width: 10%">Q.vente</th>
+                    <th style="width: 20%">D.vente</th>
+                    <th style="width: 15%">Prix</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($list_achats_vente->sortByDesc('prix') as $vente)
                     <tr>
                         <td>
                             jj
@@ -194,6 +223,7 @@
                           </div>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
               </table>
               
@@ -201,6 +231,7 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
+           @endif
 
                 </div>
               </div>
@@ -359,7 +390,7 @@
     }).then((result) => {
       if (result.value) {
             $.ajax({
-                    url: "/fournisseur/delete/"+id,
+                    url: "/pharmacien/delete/"+id,
                     method : "POST",   
                     data: {
                     "_token": "{{ csrf_token() }}"
@@ -367,10 +398,10 @@
                     success: function(data){            
                       Swal.fire({
                         title:'Supprimé!',
-                        text:'Le fournisseur a été supprimé..',
+                        text:'Le pharmacien a été supprimé..',
                         type:'success',
                          onClose :function () {
-                            location.href = '{{(route('fournisseur.index'))}}';
+                            location.href = '{{(route('pharmacien.index'))}}';
                           }
                       }                   
                       )           
