@@ -1,5 +1,5 @@
 @extends('layouts.master', ['titre' => 'Vente', 
-                            'nomPage' => 'Pharmacologie / Vente',
+                            'nomPage' => 'Vente Médicament',
                             'titrePage' => 'Vente' ])
 
 @section('content')
@@ -293,6 +293,20 @@
 
   <!-- page script -->
   <script>
+    function menuApp(){
+
+      document.getElementById("top").className = "nav-item has-treeview";
+
+      document.getElementById("dash").className = "nav-link";
+      document.getElementById("management").className = "nav-link";
+      document.getElementById("medicaments").className = "nav-link ";
+      document.getElementById("fournisseur").className = "nav-link ";
+      document.getElementById("pharmacien").className = "nav-link ";
+      document.getElementById("achats").className = "nav-link ";
+      document.getElementById("ventes").className = "nav-link active";
+      document.getElementById("profile").className = "nav-link";
+      document.getElementById("off").className = "nav-link";
+    }
       @if(session('message'))
           toastr.success('Vente ajoutée');
       @endif

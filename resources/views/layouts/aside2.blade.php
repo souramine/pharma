@@ -15,55 +15,71 @@
           <img src="/img/profile.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"> Borsali Nabil</a>
+          <a href="#" class="d-block">Borsali Nabil</a>
         </div>
       </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column sidebar-light" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column sidebar-light " data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" id="dash">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Tableau de bord
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview" class="menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+          <li id="top">
+            <a href="#" id="management">
+              <i class="nav-icon fas fa-cogs"></i>
               <p>
-                Pharmacologie
+                Management
                 <i class="right fas fa-angle-left "></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="{{route('medicaments.index')}}" id="medicaments">
                   <i class="nav-icon fas fa-capsules"></i>
                   <p>Médicaments</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{route('fournisseur.index')}}" id="fournisseur">
+                  <i class="nav-icon fas fa-user"></i>
                   <p>Fourniseurs</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('pharmacien.index')}}" id="pharmacien">
                   <i class="nav-icon fas fa-user-md"></i>
                   <p>Pharmaciens</p>
                 </a>
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="{{route('achats.index')}}" id="achats">
+              <i class="nav-icon fas fa-shopping-basket"></i>
+              <p>
+                Achat Médicament
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="{{route('ventes.index')}}" id="ventes">
+              <i class="nav-icon fas fa-clipboard"></i>
+              <p>
+                Vente Médicament
+              </p>
+            </a>
+          </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" id="profile">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Profile
@@ -72,7 +88,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="#" id="off">
               <i class="nav-icon fa fa-power-off"></i>
               <p>
                 Déconnexion

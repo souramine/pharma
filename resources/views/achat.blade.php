@@ -1,5 +1,5 @@
 @extends('layouts.master', ['titre' => 'Achat', 
-                            'nomPage' => 'Pharmacologie / Achat',
+                            'nomPage' => 'Achat Médicament',
                             'titrePage' => 'Achat' ])
 
 @section('content')
@@ -84,9 +84,12 @@
                       </td>
                        <td>
                         {{$l->quantite_restante}}
-                        @if($l->quantite_restante <= $l->quantite_minimum)  
-                         &nbsp;&nbsp;<span class="badge badge-danger">Epuisé</span>
+                        @if($l->quantite_restante == 0)  
+                          &nbsp;&nbsp;<span class="badge badge-danger">maba9ich bzf</span>
+                        @elseif($l->quantite_restante <= $l->quantite_minimum)
+                          &nbsp;&nbsp;<span class="badge badge-warning">kmel</span>
                         @endif
+                        
                       </td>
                       <td class="project-actions text-right">
                           <span class="btn btn-primary btn-sm" onclick="afficheDetail({{$l->id}})" style="cursor: pointer;">
@@ -309,6 +312,20 @@
 
   <!-- page script -->
   <script>
+    function menuApp(){
+
+      document.getElementById("top").className = "nav-item has-treeview";
+
+      document.getElementById("dash").className = "nav-link";
+      document.getElementById("management").className = "nav-link";
+      document.getElementById("medicaments").className = "nav-link ";
+      document.getElementById("fournisseur").className = "nav-link";
+      document.getElementById("pharmacien").className = "nav-link";
+      document.getElementById("achats").className = "nav-link active";
+      document.getElementById("ventes").className = "nav-link";
+      document.getElementById("profile").className = "nav-link";
+      document.getElementById("off").className = "nav-link";
+    }
       @if(session('message'))
           toastr.success('Achat lot Ajoutée');
       @endif

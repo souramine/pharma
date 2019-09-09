@@ -6,7 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 @include('layouts.head')
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-collapse" onload="menuApp()">
 <div class="wrapper">
   
   @include('layouts.navbar')

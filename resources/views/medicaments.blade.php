@@ -1,5 +1,5 @@
 @extends('layouts.master', ['titre' => 'Médicaments', 
-                            'nomPage' => 'Pharmacologie / Médicaments',
+                            'nomPage' => 'Management / Médicaments',
                             'titrePage' => 'Médicaments' ])
 
 @section('content')
@@ -240,6 +240,20 @@
 
   <!-- page script -->
   <script>
+    function menuApp(){
+
+      document.getElementById("top").className = "nav-item has-treeview menu-open";
+
+      document.getElementById("dash").className = "nav-link";
+      document.getElementById("management").className = "nav-link active";
+      document.getElementById("medicaments").className = "nav-link active";
+      document.getElementById("fournisseur").className = "nav-link";
+      document.getElementById("pharmacien").className = "nav-link";
+      document.getElementById("achats").className = "nav-link";
+      document.getElementById("ventes").className = "nav-link";
+      document.getElementById("profile").className = "nav-link";
+      document.getElementById("off").className = "nav-link";
+    }
   	//change forme
   	function changeForme(){
   		var forme = document.getElementById('forme').value ;

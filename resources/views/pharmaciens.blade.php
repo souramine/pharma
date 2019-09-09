@@ -1,5 +1,5 @@
 @extends('layouts.master', ['titre' => 'Pharmaciens', 
-                            'nomPage' => 'Pharmacologie / Pharmaciens',
+                            'nomPage' => 'Management / Pharmaciens',
                             'titrePage' => 'Pharmaciens' ])
 
 @section('content')
@@ -252,6 +252,21 @@
 
 	<!-- page script -->
 	<script>
+
+    function menuApp(){
+
+      document.getElementById("top").className = "nav-item has-treeview menu-open";
+
+      document.getElementById("dash").className = "nav-link";
+      document.getElementById("management").className = "nav-link active";
+      document.getElementById("medicaments").className = "nav-link ";
+      document.getElementById("fournisseur").className = "nav-link ";
+      document.getElementById("pharmacien").className = "nav-link active";
+      document.getElementById("achats").className = "nav-link ";
+      document.getElementById("ventes").className = "nav-link";
+      document.getElementById("profile").className = "nav-link";
+      document.getElementById("off").className = "nav-link";
+    }
 
       @if(session('message'))
           toastr.info('Un email est envoiyée');
