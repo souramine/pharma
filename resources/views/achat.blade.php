@@ -53,9 +53,12 @@
               </thead>
               <tbody>
                 @foreach ($lots as $l)
-                  <tr @if($l->quantite_restante <= $l->quantite_minimum)
+                  <tr @if($l->quantite_restante == 0)
                           style="background-color: #ff8d8d"
-                  @endif>
+                  @endif
+                  @if($l->quantite_restante <= $l->quantite_minimum && $l->quantite_restante !=0)
+                          style="background-color : #ffbf91" 
+                          @endif>
                       <td>
                           {{$l->id}}
                       </td>
@@ -447,8 +450,10 @@
                         //alert(Object.keys(data[1])[2]); 
                         var myModal = $('#modal-view');
 
-                        if (Object.values(data[0])[5] <= Object.values(data[0])[6]) {
+                        if (Object.values(data[0])[5] == 0) {
                           document.getElementById("color").style = "background-color: #ff8d8d";
+                        }else if(Object.values(data[0])[5] <= Object.values(data[0])[6]){
+                            document.getElementById("color").style = "background-color: #ffbf91";
                         }
                         else
                            document.getElementById("color").style = "";
