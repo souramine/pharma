@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Vente;
 use App\Models\Lot;
 use App\Models\Medicament;
@@ -46,7 +47,7 @@ class VenteController extends Controller
         $vente->prix = $request->input('prix');
         $vente->id_prescription = $request->input('id_prescription');
         $vente->remarque = $request->input('remarque');
-        $vente->pharmacien_id = 9;
+        $vente->pharmacien_id = Auth::user()->id;
         $vente->lot_id = $request->input('medicament_id');
         $vente->save();
 

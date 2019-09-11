@@ -437,6 +437,21 @@
   <script src="{{ asset('js/sweetalert2/sweetalert2.min.js')}}"></script>
 
   <script type="text/javascript">
+
+    function menuApp(){
+
+      document.getElementById("top").className = "nav-item has-treeview menu-open";
+
+      document.getElementById("dash").className = "nav-link";
+      document.getElementById("management").className = "nav-link active";
+      document.getElementById("medicaments").className = "nav-link ";
+      document.getElementById("fournisseur").className = "nav-link ";
+      document.getElementById("pharmacien").className = "nav-link active";
+      document.getElementById("achats").className = "nav-link ";
+      document.getElementById("ventes").className = "nav-link";
+      document.getElementById("profile").className = "nav-link";
+      document.getElementById("off").className = "nav-link";
+    }
     function deleteLigneAchat(id){
     Swal.fire({
         backdrop: `

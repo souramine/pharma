@@ -7,6 +7,7 @@ use App\Models\Lot;
 use App\Models\Medicament;
 use App\Models\Fournisseur;
 use App\Models\Pharmacien;
+use Illuminate\Support\Facades\Auth;
 
 
 class LotController extends Controller
@@ -48,7 +49,7 @@ class LotController extends Controller
         $achat->quantite_restante = $request->input('quantite_acheter');
         $achat->quantite_minimum = $request->input('quantite_minimum');
         $achat->prix = $request->input('prix');
-        $achat->pharmacien_id = 9;
+        $achat->pharmacien_id = Auth::user()->id;
         $achat->remarque = $request->input('remarque');
         $achat->fournisseur_id = (int)$request->input('fournisseur_id');
         $achat->medicament_id = (int)$request->input('medicament_id');
