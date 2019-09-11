@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('started');
-});
+    return view('dash');
+})->middleware('auth');
 
 Route::get('/dash', function () {
     return view('dash');
