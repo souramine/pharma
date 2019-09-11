@@ -44,7 +44,7 @@ class PharmacienController extends Controller
     {
         $pharmacien = new Pharmacien;
         $pharmacien->name = strtoupper($request->input('name'));
-        $pharmacien->mail = $request->input('mail');
+        $pharmacien->email = $request->input('mail');
         $pharmacien->numero = $request->input('numero');
         $pharmacien->naissance = $request->input('naissance');
         $pharmacien->adresse = $request->input('adresse');
@@ -56,14 +56,14 @@ class PharmacienController extends Controller
             $pharmacien->admin = 0;
 
         $tmp = substr(md5(microtime()),rand(0,26),8);
-        $pharmacien->mdp = Hash::make($tmp);
+        $pharmacien->password = Hash::make($tmp);
 
         $pharmacien->save();
 
         //envoiyer un mail password a l'utilisateur ajoutée
         $to_name = strtoupper($request->input('name'));
         $to_email = $request->input('mail');
-        $data = array('name'=>$to_name, "mdp" => $tmp);
+        $data = array('name'=>$to_name, "password" => $tmp);
         Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
         $message->to($to_email, $to_name)
         ->subject('Password');

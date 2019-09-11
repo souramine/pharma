@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('started');
 });
 
+Route::get('/dash', function () {
+    return view('dash');
+});
+
 Route::get('/login', function () {
     return view('login.login');
 });
@@ -22,35 +26,41 @@ Route::get('/login', function () {
 
 
 //--------------------------------------Pharmaciens ----------------------------------------------
-Route::resource('pharmacien','PharmacienController');
-Route::post('/pharmacien/delete/{id}','PharmacienController@destroy');
-Route::post('/addPharmacien','PharmacienController@store')->name('addPharmacien');
-Route::get('/detail/pharmacien/{id}','PharmacienController@getDetailPharmacien')->name('detailP');
+Route::resource('pharmacien','PharmacienController')->middleware('auth');
+Route::post('/pharmacien/delete/{id}','PharmacienController@destroy')->middleware('auth');
+Route::post('/addPharmacien','PharmacienController@store')->name('addPharmacien')->middleware('auth');
+Route::get('/detail/pharmacien/{id}','PharmacienController@getDetailPharmacien')->name('detailP')->middleware('auth');
 
 //--------------------------------------Fournisseur ----------------------------------------------
-Route::resource('fournisseur','FournisseurController');
-Route::post('/fournisseur/delete/{id}','FournisseurController@destroy');
-Route::post('/addFournisseur','FournisseurController@store')->name('addFournisseur');
-Route::post('/fournisseur','FournisseurController@getFournisseurNom');
-Route::get('/detail/fournisseur/{id}','FournisseurController@getDetailFournisseur')->name('detailF');
+Route::resource('fournisseur','FournisseurController')->middleware('auth');
+Route::post('/fournisseur/delete/{id}','FournisseurController@destroy')->middleware('auth');
+Route::post('/addFournisseur','FournisseurController@store')->name('addFournisseur')->middleware('auth');
+Route::post('/fournisseur','FournisseurController@getFournisseurNom')->middleware('auth');
+Route::get('/detail/fournisseur/{id}','FournisseurController@getDetailFournisseur')->name('detailF')->middleware('auth');
 
 //--------------------------------------Medicament ----------------------------------------------
-Route::resource('medicaments','MedicamentController');
-Route::post('/medicaments/delete/{id}','MedicamentController@destroy');
-Route::post('/addMedicaments','MedicamentController@store')->name('addMedicaments');
-Route::post('/medicament','MedicamentController@getMedicamentNom');
+Route::resource('medicaments','MedicamentController')->middleware('auth');
+Route::post('/medicaments/delete/{id}','MedicamentController@destroy')->middleware('auth');
+Route::post('/addMedicaments','MedicamentController@store')->name('addMedicaments')->middleware('auth');
+Route::post('/medicament','MedicamentController@getMedicamentNom')->middleware('auth');
 
 //--------------------------------------Achat ----------------------------------------------
-Route::resource('achats','LotController');
-Route::post('/achat/delete/{id}','LotController@destroy');
-Route::post('/addAchat','LotController@store')->name('addAchat');
-Route::get('/detail/achat/{id}','LotController@getDetailLot')->name('detailL');
+Route::resource('achats','LotController')->middleware('auth');
+Route::post('/achat/delete/{id}','LotController@destroy')->middleware('auth');
+Route::post('/addAchat','LotController@store')->name('addAchat')->middleware('auth');
+Route::get('/detail/achat/{id}','LotController@getDetailLot')->name('detailL')->middleware('auth');
 
 //--------------------------------------Vente ----------------------------------------------
-Route::resource('ventes','VenteController');
-Route::post('/vente/checkMedicament/{id}','VenteController@checkMedicament');
-Route::post('/vente/delete/{id}','VenteController@destroy');
-Route::post('/addVente','VenteController@store')->name('addVente');
-Route::get('/detail/vente/{id}','VenteController@afficheDetail')->name('detailV');
+Route::resource('ventes','VenteController')->middleware('auth');
+Route::post('/vente/checkMedicament/{id}','VenteController@checkMedicament')->middleware('auth');
+Route::post('/vente/delete/{id}','VenteController@destroy')->middleware('auth');
+Route::post('/addVente','VenteController@store')->name('addVente')->middleware('auth');
+Route::get('/detail/vente/{id}','VenteController@afficheDetail')->name('detailV')->middleware('auth');
 //Route::get('/detail/achat/{id}','LotController@getDetailLot')->name('detailL');
 
+//--------------------------------------Dashboard ----------------------------------------------
+
+
+Auth::routes();
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/home', 'HomeController@index')->name('home');

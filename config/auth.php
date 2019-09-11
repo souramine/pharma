@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'pharmacies',
     ],
 
     /*
@@ -38,12 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'pharmacies',
         ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'pharmacies',
             'hash' => false,
         ],
     ],
@@ -66,9 +66,9 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'pharmacies' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\Pharmacien::class,
         ],
 
         // 'users' => [
@@ -93,8 +93,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'pharmacies' => [
+            'provider' => 'pharmacies',
             'table' => 'password_resets',
             'expire' => 60,
         ],

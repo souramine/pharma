@@ -62,7 +62,7 @@
                           </small>
                       </td>
                       <td>
-                          {{$phar->mail}}
+                          {{$phar->email}}
                           <br>
                           <small>
                               {{$phar->numero}}
