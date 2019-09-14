@@ -47,6 +47,12 @@ Route::get('/detail/vente/{id}','VenteController@afficheDetail')->name('detailV'
 //--------------------------------------Dashboard ----------------------------------------------
 Route::resource('dash','DashController')->middleware('auth');
 Route::resource('/','DashController')->middleware('auth');
+
+//--------------------------------------Profil -------------------------------------------------
+Route::resource('profil','ProfilController')->middleware('auth');
+
+
+//--------------------------------------login -------------------------------------------------
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/home', 'HomeController@index')->name('home');

@@ -112,12 +112,13 @@
 </style>
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="{{asset('css/ionicons.min.css') }}">
+
 @stop
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="{{ asset('js/chart/moment.min.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/chart/chart.js')}}"></script>
-
-<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+<script type="text/javascript" src="{{ asset('js/chart/utils.js')}}"></script>
 	<script type="text/javascript">
 		function menuApp(){
 
