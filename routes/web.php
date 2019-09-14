@@ -11,20 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dash');
-})->middleware('auth');
-
-Route::get('/dash', function () {
-    return view('dash');
-});
-
-Route::get('/login', function () {
-    return view('login.login');
-});
-
-
-
 //--------------------------------------Pharmaciens ----------------------------------------------
 Route::resource('pharmacien','PharmacienController')->middleware('auth');
 Route::post('/pharmacien/delete/{id}','PharmacienController@destroy')->middleware('auth');
@@ -59,8 +45,8 @@ Route::get('/detail/vente/{id}','VenteController@afficheDetail')->name('detailV'
 //Route::get('/detail/achat/{id}','LotController@getDetailLot')->name('detailL');
 
 //--------------------------------------Dashboard ----------------------------------------------
-
-
+Route::resource('dash','DashController')->middleware('auth');
+Route::resource('/','DashController')->middleware('auth');
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/home', 'HomeController@index')->name('home');

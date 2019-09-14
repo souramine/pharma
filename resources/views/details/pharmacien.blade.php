@@ -86,7 +86,7 @@
                   <span class="btn-link text-secondary"><i class="fas fa-file-medical"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{$pharmacien->grade}} ( {{$pharmacien->spe}})</span>
                 </li>
                 <li>
-                  <span href="" class="btn-link text-secondary"><i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;{{$pharmacien->mail}}</span>
+                  <span href="" class="btn-link text-secondary"><i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;{{$pharmacien->email}}</span>
                 </li>
                 <li>
                   <span href="" class="btn-link text-secondary"><i class="fas fa-phone-alt"></i>&nbsp;&nbsp;&nbsp;{{$pharmacien->numero}}</span>
@@ -110,8 +110,8 @@
 
           </div>
           <br>
-          <div class="col-sm-12">
-          <div class="col-sm-6 " style="position: static;">
+       <div class="row">
+            <div class="col-12 col-md-12 col-lg-6 order-2 order-md-1">
                   <h4>List des toutes les achats</h4>
                   @if($list_achats->isEmpty())
                     <br>
@@ -175,7 +175,9 @@
           @endif
 
                 </div>
-                <div class="col-sm-6" style="position: absolute; left: 50%; top: 0%">
+
+            <div class="col-12 col-md-12 col-lg-6 order-2 order-md-1">
+               
                   <h4>List des toutes les ventes</h4>
                    @if($list_achats->isEmpty())
                     <br>
@@ -270,6 +272,7 @@
 
                 </div>
               </div>
+           
         </div>
         <!-- /.card-body -->
       </div>
