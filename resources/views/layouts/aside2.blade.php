@@ -15,7 +15,7 @@
           <img src="/img/profile.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{route('profil.index')}}" class="d-block">{{Auth::user()->name}}</a>
+          <a href="{{route('profile.index')}}" class="d-block">{{Auth::user()->name}}</a>
           @if(Auth::user()->admin == 1 )
            <span class="badge badge-success">ADMIN</span>
           @endif
@@ -82,7 +82,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{route('profil.index')}}" id="profile">
+            <a href="{{route('profile.index')}}" id="profile">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Profile

@@ -49,7 +49,7 @@ Route::resource('dash','DashController')->middleware('auth');
 Route::resource('/','DashController')->middleware('auth');
 
 //--------------------------------------Profil -------------------------------------------------
-Route::resource('profil','ProfilController')->middleware('auth');
+Route::resource('profile','ProfilController')->middleware('auth');
 
 
 //--------------------------------------login -------------------------------------------------

@@ -60,7 +60,7 @@ class PharmacienController extends Controller
 
         $pharmacien->save();
 
-        //envoiyer un mail password a l'utilisateur ajoutée
+        //envoyer un mail password a l'utilisateur ajoutée
         $to_name = strtoupper($request->input('name'));
         $to_email = $request->input('mail');
         $data = array('name'=>$to_name, "password" => $tmp);
