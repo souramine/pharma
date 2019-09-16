@@ -50,6 +50,7 @@ Route::resource('/','DashController')->middleware('auth');
 
 //--------------------------------------Profil -------------------------------------------------
 Route::resource('profile','ProfilController')->middleware('auth');
+Route::post('/modifProfile','ProfilController@store')->name('modifProfile')->middleware('auth');
 
 
 //--------------------------------------login -------------------------------------------------

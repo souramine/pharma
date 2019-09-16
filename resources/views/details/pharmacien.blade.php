@@ -179,7 +179,7 @@
             <div class="col-12 col-md-12 col-lg-6 order-2 order-md-1">
                
                   <h4>List des toutes les ventes</h4>
-                   @if($list_achats->isEmpty())
+                   @if($list_achats_vente->isEmpty())
                     <br>
                     <div class="alert alert-info alert-dismissible" style="text-align: center">
                       <h5><i class="icon fas fa-info"></i> Médicaments !</h5>

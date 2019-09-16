@@ -79,242 +79,195 @@
               <div class="card-body">
                 <div class="tab-content">
                   <div class="active tab-pane" id="activity">
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                        </span>
-                        <span class="description">Shared publicly - 7:30 PM today</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore the hate as they create awesome
-                        tools to help create filler text for everyone from bacon lovers
-                        to Charlie Sheen fans.
-                      </p>
+                    <h5>List des toutes les achats</h5>
+                    @if($list_achats->isEmpty())
+                    <br>
+                    <div class="alert alert-info alert-dismissible" style="text-align: center">
+                      <h5><i class="icon fas fa-info"></i> Médicaments !</h5>
+                      Info alert preview. This alert is dismissable.
+              </div>
+             @else
+                  
+                  <div class="card card-info">
+                    
+            <div class="card-header">
+              <h3 class="card-title">Médicaments</h3>
 
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                      </p>
-
-                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post clearfix">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user7-128x128.jpg" alt="User Image">
-                        <span class="username">
-                          <a href="#">Sarah Ross</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                        </span>
-                        <span class="description">Sent you a message - 3 days ago</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        Lorem ipsum represents a long-held tradition for designers,
-                        typographers and the like. Some people hate it and argue for
-                        its demise, but others ignore the hate as they create awesome
-                        tools to help create filler text for everyone from bacon lovers
-                        to Charlie Sheen fans.
-                      </p>
-
-                      <form class="form-horizontal">
-                        <div class="input-group input-group-sm mb-0">
-                          <input class="form-control form-control-sm" placeholder="Response">
-                          <div class="input-group-append">
-                            <button type="submit" class="btn btn-danger">Send</button>
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 40%">Nom de médicament</th>
+                    <th style="width: 10%">Q.acheter</th>
+                    <th style="width: 20%">D.acheter</th>
+                    <th style="width: 15%">Prix</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($list_achats->sortByDesc('prix') as $achat)
+                    <tr>
+                        <td>
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('nom')->first()}}
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('dosage')->first()}}
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('unite')->first()}}
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('forme')->first()}}
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('volume')->first()}}
+                            {{DB::table('medicaments')->where('id',$achat->medicament_id)->pluck('unite_volume')->first()}}
+                        </td>
+                         <td>{{$achat->quantite_acheter}}</td>
+                        <td>{{$achat->date_achat}}</td>
+                        <td>{{$achat->prix}} DA</td>
+                        <td class="text-right py-0 align-middle">
+                          <div class="btn-group btn-group-sm">
+                            <button class="btn btn-info" onclick="afficheDetailAchat({{$achat->id}})"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-danger" onclick="deleteLigneAchat({{$achat->id}})"><i class="fas fa-trash"></i></button> 
                           </div>
-                        </div>
-                      </form>
-                    </div>
-                    <!-- /.post -->
-
-                    <!-- Post -->
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user6-128x128.jpg" alt="User Image">
-                        <span class="username">
-                          <a href="#">Adam Jones</a>
-                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
-                        </span>
-                        <span class="description">Posted 5 photos - 5 days ago</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <div class="row mb-3">
-                        <div class="col-sm-6">
-                          <img class="img-fluid" src="../../dist/img/photo1.png" alt="Photo">
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-6">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <img class="img-fluid mb-3" src="../../dist/img/photo2.png" alt="Photo">
-                              <img class="img-fluid" src="../../dist/img/photo3.jpg" alt="Photo">
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-sm-6">
-                              <img class="img-fluid mb-3" src="../../dist/img/photo4.jpg" alt="Photo">
-                              <img class="img-fluid" src="../../dist/img/photo1.png" alt="Photo">
-                            </div>
-                            <!-- /.col -->
-                          </div>
-                          <!-- /.row -->
-                        </div>
-                        <!-- /.col -->
-                      </div>
-                      <!-- /.row -->
-
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <span class="float-right">
-                          <a href="#" class="link-black text-sm">
-                            <i class="far fa-comments mr-1"></i> Comments (5)
-                          </a>
-                        </span>
-                      </p>
-
-                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
-                    </div>
-                    <!-- /.post -->
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+              </table>
+              
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+          @endif
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="timeline">
-                    <!-- The timeline -->
-                    <div class="timeline timeline-inverse">
-                      <!-- timeline time label -->
-                      <div class="time-label">
-                        <span class="bg-danger">
-                          10 Feb. 2014
-                        </span>
-                      </div>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-envelope bg-primary"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
-                          <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
-                          <div class="timeline-body">
-                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                            quora plaxo ideeli hulu weebly balihoo...
-                          </div>
-                          <div class="timeline-footer">
-                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                          </div>
+                   
+                   <h5>List des toutes les ventes</h5>
+                      @if($list_achats_vente->isEmpty())
+                        <br>
+                        <div class="alert alert-info alert-dismissible" style="text-align: center">
+                            <h5><i class="icon fas fa-info"></i> Médicaments !</h5>
+                            Info alert preview. This alert is dismissable.
                         </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-user bg-info"></i>
+                      @else
+                      <div class="card card-info">
+                    
+            <div class="card-header">
+              <h3 class="card-title">Médicaments</h3>
 
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                          <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request
-                          </h3>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-comments bg-warning"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-
-                          <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
-
-                          <div class="timeline-body">
-                            Take me to your leader!
-                            Switzerland is small and neutral!
-                            We are more like Germany, ambitious and misunderstood!
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 40%" >Nom de médicament</th>
+                    <th style="width: 10%">Q.vente</th>
+                    <th style="width: 20%">D.vente</th>
+                    <th style="width: 15%">Prix</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($list_achats_vente->sortByDesc('prix') as $v)
+                    <tr>
+                        <td>
+                             {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('nom')
+                          ->first()
+                          }}
+                          {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('dosage')
+                          ->first()
+                          }}
+                          {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('unite')
+                          ->first()
+                          }}
+                           {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('forme')
+                          ->first()
+                          }}
+                          {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('volume')
+                          ->first()
+                          }}
+                          {{DB::table('medicaments')
+                          ->join('lot','medicaments.id','lot.medicament_id')
+                          ->where('lot.id',$v->lot_id)
+                          ->pluck('unite_volume')
+                          ->first()
+                          }}
+                        </td>
+                        <td>{{$v->quantite_vendu}}</td>
+                        <td>{{$v->date_vente}}</td>
+                        <td>{{$v->prix}} DA</td>
+                        <td class="text-right py-0 align-middle">
+                          <div class="btn-group btn-group-sm">
+                            <button class="btn btn-info" onclick="afficheDetailVente({{$v->id}})"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-danger" onclick="deleteLigneVente({{$v->id}})"><i class="fas fa-trash"></i></button> 
                           </div>
-                          <div class="timeline-footer">
-                            <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <!-- timeline time label -->
-                      <div class="time-label">
-                        <span class="bg-success">
-                          3 Jan. 2014
-                        </span>
-                      </div>
-                      <!-- /.timeline-label -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-camera bg-purple"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                          <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                          <div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                            <img src="http://placehold.it/150x100" alt="...">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-                      <div>
-                        <i class="far fa-clock bg-gray"></i>
-                      </div>
-                    </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+              </table>
+              
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+           @endif
                   </div>
                   <!-- /.tab-pane -->
 
                   <div class="tab-pane" id="settings">
+                     <form action="{{ route('modifProfile') }}" method="post">
+                            {{ csrf_field() }}
                     <div class="row">
+                     
         			<div class="col-md-6">
           <div class="card card-primary">
             
             <div class="card-body">
+
             		<div class="form-group">
                 <label for="">Nom Prénom</label>
-                <input type="text" name="name" id="" value="{{Auth::user()->name}}" class="form-control">
+                <input type="text" name="name"  value="{{Auth::user()->name}}" class="form-control">
               </div>
               <div class="form-group">
                 <label for="">Adresse mail</label>
-                <input type="mail" name="mail" id="" value="{{Auth::user()->email}}"class="form-control">
+                <input type="mail" name="mail"  value="{{Auth::user()->email}}"class="form-control">
               </div>
 
               <div class="form-group">
                 <label for="">Numéro de téléphone</label>
-                <input type="number" name="numero" id="" value="{{Auth::user()->numero}}" class="form-control">
+                <input type="number" name="numero"  value="{{Auth::user()->numero}}" class="form-control">
               </div>
               <div class="form-group">
                 <label for="">Date de naissance</label>
-                <input type="date" name="naissance" id="" value="{{Auth::user()->naissance}}" class="form-control">
+                <input type="date" name="naissance"  value="{{Auth::user()->naissance}}" class="form-control">
               </div>
 
               <div class="form-">
                 <label for="inputDescription">Adresse</label>
-                <textarea id="" name="adresse" class="form-control" value="{{Auth::user()->adresse}}" rows="2"></textarea>
+                <textarea  name="adresse" class="form-control" rows="2">{{Auth::user()->adresse}}</textarea>
                 <br>
               </div>
             </div>
@@ -347,27 +300,26 @@
               </div>
                <div class="form-group">
                 <label for="">Mot de passe</label>
-                <input type="password" name="mdp1" id=""  class="form-control">
+                <input type="password" name="mdp1"   class="form-control">
               </div>
                <div class="form-group">
                 <label for="">Nouveau mot de passe</label>
-                <input type="password" name="mdp2" id=""  class="form-control">
+                <input type="password" name="mdp2"   class="form-control">
               </div>
                <div class="form-group">
                 <label for="">Confirmer votre nouveau mot de passe</label>
-                <input type="password" name="mdp3" id=""  class="form-control">
+                <input type="password" name="mdp3"   class="form-control">
               </div>
 
-                    <button class="btn  btn-outline-primary btn-sm">Modifier le profile</button>
-       
-              
-
+             <input type="submit" class="btn btn-outline-primary btn-sm" value="Modifier le profile">
             </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
         </div>
+      
         		</div>
+          </form>
                   </div>
                   <!-- /.tab-pane -->
                 </div>
@@ -380,9 +332,174 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
+
+      <div class="modal fade" id="modal-default2">
+        <div class="modal-dialog modal-default">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Détail du médicament</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+              <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Détail</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="">Nom du médicament ou nom du DCI</label>
+                <input type="text" disabled name="" id="medicament_nom_view" class="form-control">
+              </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Prix Total de vente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text"  disabled name="" style="text-align: center" id="prix_view" class="form-control col-md-7">    
+                </div>
+
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Quantité vendu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" disabled name="" style="text-align: center" id="quantite_vendu_view" class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Date de vente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" disabled name="" style="text-align: center" id="dateV_view" class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Prescription&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" disabled name="id_prescription" style="text-align: center" id="prescription_view" class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Vente ajouter par&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <a href="" disabled style="text-align: center;background-color: #b6fcd5" id="pharmacien_view_2" class="form-control col-md-7"> </a>   
+                </div>
+                <div class="form-">
+                <label for="inputDescription">Remarque</label>
+                <textarea id="remarque_view" disabled name="" class="form-control" rows="2"></textarea>
+              </div>
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+            </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-secondary"  data-dismiss="modal">Quitter</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <div class="modal fade" id="modal-default">
+        <div class="modal-dialog modal-default">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Détail du médicament</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+              <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Détail</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label for="">Nom du médicament ou nom du DCI</label>
+                <input type="text" id="medicament_nom" class="form-control" disabled>
+              </div>
+              <div class="form-group">
+                <label for="">Nom du Fourniseur</label>
+                <a href=""  disabled  id="fournisseur_nom_view" class="form-control" style="text-align: center ;background-color: #99d2fc"></a>
+              </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Prix Total du produit&nbsp;&nbsp;</label> 
+                    <input type="text" step="0.01" id="prix" style="text-align: center" class="form-control col-md-7" disabled >    
+                </div>
+
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Quantité acheter&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" id="quantite_acheter" style="text-align: center" disabled class="form-control col-md-7">    
+                </div>
+
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Quantité minimum&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" id="quantite_minimum" style="text-align: center" disabled class="form-control col-md-7">    
+                </div>
+            
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Date de fabrication&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" id="date_f" style="text-align: center" disabled class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Date de péremption&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" id="date_p" style="text-align: center" disabled class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Date d'achat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <input type="text" id="date_a" style="text-align: center" disabled class="form-control col-md-7">    
+                </div>
+                <div class="form-group form-inline">
+                    <label for="">&nbsp;&nbsp;&nbsp;Acheter par&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+                    <a href="" disabled style="text-align: center;background-color: #b6fcd5" id="pharmacien_view" class="form-control col-md-7"> </a>   
+                </div>
+                <div class="form-group">
+                <label for="inputDescription">Remarque</label>
+                <textarea id="remarque_view"  disabled name="" class="form-control" rows="2"></textarea>
+              </div>
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+            </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-secondary"  data-dismiss="modal">Quitter</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+
+@stop
+@section('css')
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('/js/toastr/toastr.min.css') }}">
+    <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="{{ asset('/js/sweetalert2/sweetalert2.min.css') }}">
 @stop
 
 @section('js')
+<!-- Toastr -->
+  <script src="{{ asset('js/toastr/toastr.min.js')}}"></script>
+  <!-- SweetAlert2 -->
+  <script src="{{ asset('js/sweetalert2/sweetalert2.min.js')}}"></script>
+
 	<script type="text/javascript">
 		function menuApp(){
 
@@ -398,6 +515,180 @@
       document.getElementById("profile").className = "nav-link active";
       document.getElementById("off").className = "nav-link";
     }
+    @if(session('erreur'))
+          toastr.error('Le mot de passe entré est incorrect');
+    @endif
+    @if(session('erreur2'))
+          toastr.error('Le nv mot de passe entrée n est pas identique');
+    @endif
+    @if(session('message'))
+          toastr.success('Profile modifié avec succées');
+    @endif
+
+
+    function afficheDetailVente(id){
+    $.ajax({
+                    url: "/detail/vente/"+id,
+                    method : "get",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+                    success: function(data){   
+                        var myModal = $('#modal-default2');
+                        document.getElementById('medicament_nom_view').value = Object.values(data[3])[1] +" "+ Object.values(data[3])[2] +" "+Object.values(data[3])[3] +" "+ Object.values(data[3])[4] +" "+Object.values(data[3])[6] +" "+Object.values(data[3])[7];
+                        document.getElementById('prix_view').value = Object.values(data[0])[3] +" DA" ;
+                        document.getElementById('quantite_vendu_view').value = Object.values(data[0])[2] ;
+                        document.getElementById('dateV_view').value = Object.values(data[0])[1] ;
+                        document.getElementById('prescription_view').value = Object.values(data[0])[4] ;
+                        document.getElementById('remarque_view').value = Object.values(data[0])[5] ;
+
+                        document.getElementById('pharmacien_view_2').innerHTML = Object.values(data[1])[1] ;
+                        document.getElementById("pharmacien_view_2").href = "/detail/pharmacien/"+Object.values(data[1])[0];
+
+                        myModal.modal({ show: true });        
+                                
+                    },
+                    error: function(data){
+                        Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'Quelque chose a mal tourné!'
+                        })
+                      }
+                  });
+        
+
+  }
+
+  function deleteLigneVente(id){
+    Swal.fire({
+        backdrop: `
+        rgba(255,0,0,0.4)
+      `,
+      title: 'Êtes-vous sûr?',
+      text: "Vous ne pourrez pas revenir en arrière!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Oui, supprimez-le!',
+      cancelButtonText:'Annuler'
+
+    }).then((result) => {
+      if (result.value) {
+            $.ajax({
+                    url: "/vente/delete/"+id,
+                    method : "POST",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+                    success: function(data){            
+                      Swal.fire({
+                        title:'Supprimé!',
+                        text:'La vente a été supprimé..',
+                        type:'success',
+                         onClose :function () {
+                            window.location.reload();
+                          }
+                      }                   
+                      )           
+                    },
+                    error: function(data){
+                        Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'Quelque chose a mal tourné!'
+                        })
+                      }
+                  }); 
+      }
+    })
+      }
+
+      function afficheDetailAchat(id){
+    $.ajax({
+                    url: "/detail/achat/"+id,
+                    method : "get",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+                    success: function(data){   
+                        //alert(Object.keys(data[1])[2]); 
+                        var myModal = $('#modal-default');
+                        document.getElementById('medicament_nom').value = Object.values(data[2])[1] +" "+ Object.values(data[2])[2] +" "+ Object.values(data[2])[3] +" "+Object.values(data[2])[4] +" "+Object.values(data[2])[6] +" "+Object.values(data[2])[7];
+
+                        document.getElementById('fournisseur_nom_view').innerHTML = Object.values(data[1])[1] ;
+                        document.getElementById("fournisseur_nom_view").href = "/detail/fournisseur/"+Object.values(data[1])[0];
+
+                        document.getElementById('prix').value = Object.values(data[0])[7] +" DA" ;
+                        document.getElementById('quantite_acheter').value = Object.values(data[0])[4] ;
+                        document.getElementById('quantite_minimum').value = Object.values(data[0])[6] ;
+                        document.getElementById('date_f').value = Object.values(data[0])[1] ;
+                        document.getElementById('date_p').value = Object.values(data[0])[2] ;
+                        document.getElementById('date_a').value = Object.values(data[0])[3] ;
+                        document.getElementById('remarque_view').value = Object.values(data[0])[8] ;
+                        document.getElementById('pharmacien_view').innerHTML = Object.values(data[3])[1] ;
+                        document.getElementById("pharmacien_view").href = "/detail/pharmacien/"+Object.values(data[3])[0];
+
+                        myModal.modal({ show: true });        
+                                
+                    },
+                    error: function(data){
+                        Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'Quelque chose a mal tourné!'
+                        })
+                      }
+                  }); 
+        
+
+  }
+
+  function deleteLigneAchat(id){
+    Swal.fire({
+        backdrop: `
+        rgba(255,0,0,0.4)
+      `,
+      title: 'Êtes-vous sûr?',
+      text: "Vous ne pourrez pas revenir en arrière!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Oui, supprimez-le!',
+      cancelButtonText:'Annuler'
+
+    }).then((result) => {
+      if (result.value) {
+            $.ajax({
+                    url: "/achat/delete/"+id,
+                    method : "POST",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+                    success: function(data){            
+                      Swal.fire({
+                        title:'Supprimé!',
+                        text:'Le achat a été supprimé..',
+                        type:'success',
+                         onClose :function () {
+                            window.location.reload();
+                          }
+                      }                   
+                      )           
+                    },
+                    error: function(data){
+                        Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'Quelque chose a mal tourné!'
+                        })
+                      }
+                  }); 
+      }
+    })
+      }
 	</script>
 
 @stop
