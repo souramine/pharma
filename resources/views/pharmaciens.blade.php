@@ -6,7 +6,11 @@
    <!-- Default box -->
       <div class="card">
         <div class="card-header">
-           <h3 class="card-title">List des pharmaciens&nbsp;&nbsp;<button type="button" class="btn  btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal-lg">Ajouter</button></h3>
+           <h3 class="card-title">List des pharmaciens&nbsp;&nbsp;
+            @if(Auth::user()->admin == 1)
+            <button type="button" class="btn  btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal-lg">Ajouter</button>
+            @endif
+          </h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -90,16 +94,20 @@
                               </i>
                               Détail
                           </a>
+                          @if(Auth::user()->admin == 1)
                           <span class="btn btn-info btn-sm" style="cursor: pointer;">
                               <i class="fas fa-pencil-alt">
                               </i>
                               Modi
                           </span>
+                          @endif
+                          @if(Auth::user()->admin == 1)
                           <span class="btn btn-danger btn-sm" style="cursor: pointer;" onclick="deleteLigne({{$phar->id}})">
                               <i class="fas fa-trash">
                               </i>
                               Supp
                           </span>
+                          @endif
                       </td>
                   </tr>
                   @endforeach
