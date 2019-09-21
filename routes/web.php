@@ -30,6 +30,8 @@ Route::get('/detail/fournisseur/{id}','FournisseurController@getDetailFournisseu
 Route::resource('medicaments','MedicamentController')->middleware('auth');
 Route::post('/medicaments/delete/{id}','MedicamentController@destroy')->middleware('auth');
 Route::post('/addMedicaments','MedicamentController@store')->name('addMedicaments')->middleware('auth');
+Route::post('/mofiMedicaments','MedicamentController@edit')->name('mofiMedicaments')->middleware('auth');
+Route::post('/getMedicaments/{id}','MedicamentController@getDetailMedi')->name('getMedicaments')->middleware('auth');
 Route::post('/medicament','MedicamentController@getMedicamentNom')->middleware('auth');
 Route::get('/detail/medi/{id}','MedicamentController@getDetailMedi')->name('detailL')->middleware('auth');
 

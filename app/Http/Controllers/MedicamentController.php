@@ -70,9 +70,32 @@ class MedicamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $medi = Medicament::find($id);
+        $medi->nom = strtoupper($request->input('nom_modif'));
+        $medi->famille = $request->input('famille_modif');
+        $medi->voie = $request->input('voie_modif');
+        $medi->forme = $request->input('forme_modif');
+        $medi->dosage = $request->input('dosage_modif');
+        $medi->unite = $request->input('unite_modif');
+        if ($request->input('forme_modif') == 'Poudre') {
+            $medi->volume = $request->input('volume_modif');
+         $medi->unite_volume = $request->input('unite_vol_modif');
+         $medi->solvant = $request->input('solvant_modif');
+        }else{  
+            
+         $medi->volume = null;
+         $medi->unite_volume = null;
+         $medi->solvant = null;
+
+        }
+        
+        $medi->save();
+
+        return redirect('medicaments')->with('message2','Medicament modifier');
+
     }
 
     /**

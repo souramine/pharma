@@ -135,7 +135,7 @@
                 
               </ul>
               <div class="text-center mt-4 mb-0">
-                <button class="btn btn-sm btn-primary">Modifier</button>
+                <button class="btn btn-sm btn-primary" onclick="modifLigne({{$fourniseur->id}})">Modifier</button>
                 <button class="btn btn-sm btn-danger" onclick="deleteLignef({{$fourniseur->id}})">Supprimer le fournisseur</button>
               </div>
             </div>
@@ -223,6 +223,74 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+
+      <form action="{{ route('modifFournisseur') }}" method="post">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="id" id="id">
+           <div class="modal fade" id="modal-modif">
+        <div class="modal-dialog modal-default">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Modifier un Fournisseur</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+              <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Tout les champs sont obligatoire</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                <label for="">Nom Prénom</label>
+                <input type="text" name="name_modif" id="name_modif" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="">Adresse mail</label>
+                <input type="mail" name="mail_modif" id="mail_modif" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label for="">Numéro de téléphone</label>
+                <input type="number" name="numero_modif" id="numero_modif" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="">Date de naissance</label>
+                <input type="date" name="naissance_modif" id="naissance_modif" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="">Numéro de registre de commerce</label>
+                <input type="number" name="numero_reg_modif" id="numero_reg_modif" class="form-control" required>
+              </div>
+
+              
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        
+            </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+              <input type="submit" class="btn btn-primary" value="Mettre a jour">
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+  </form>
 @stop
 @section('css')
   <!-- SweetAlert2 -->
@@ -373,5 +441,36 @@
         
 
   }
+
+  function modifLigne(id){
+        $.ajax({
+                    url: "/getFournisseur/"+id,
+                    method : "post",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+                    success: function(data){   
+
+                        var myModal = $('#modal-modif');
+
+                         document.getElementById('id').value = Object.values(data[0])[0];
+                        document.getElementById('name_modif').value = Object.values(data[0])[1];
+                        document.getElementById('mail_modif').value = Object.values(data[0])[3] ;
+                        document.getElementById('numero_modif').value = Object.values(data[0])[4] ;
+                        document.getElementById('naissance_modif').value = Object.values(data[0])[2] ;
+                        document.getElementById('numero_reg_modif').value = Object.values(data[0])[5] ;
+
+                        myModal.modal({ show: true });        
+                                
+                    },
+                    error: function(data){
+                        Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'Quelque chose a mal tourné!'
+                        })
+                      }
+                  }); 
+      }
   </script>
 @stop
