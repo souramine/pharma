@@ -188,7 +188,7 @@
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-              <input type="submit" class="btn btn-primary" value="Sauvegarder">
+              <input type="submit" class="btn btn-primary"  id="savv" value="Sauvegarder">
             </div>
           </div>
           <!-- /.modal-content -->
@@ -410,6 +410,11 @@
                     else{
                       $("#medicament_id").attr("value",data[1]);
                       document.getElementById("quantite_vendu").placeholder = "quantité restante = "+data[0];
+                      if (data[0] == 0) {
+                        document.getElementById("savv").disabled = true;
+                      }else
+                      document.getElementById("savv").disabled = false;
+
                     }                    
                     },
                     error: function(data){
