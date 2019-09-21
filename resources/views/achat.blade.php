@@ -329,6 +329,9 @@
       @if(session('message'))
           toastr.success('Achat lot Ajoutée');
       @endif
+      @if(session('erreur'))
+          toastr.error('Erreur date');
+      @endif
     //data table
     $(function () {
       $("#example1").DataTable();

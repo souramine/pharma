@@ -41,6 +41,9 @@ class LotController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->input('date_f') > $request->input('date_p')) {
+           return redirect('achats')->with('erreur','erreur');
+        }
         $achat = new lot;
         $achat->date_fabrication = $request->input('date_f');
         $achat->date_peremption = $request->input('date_p');
