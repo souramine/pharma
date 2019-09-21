@@ -113,4 +113,9 @@ class MedicamentController extends Controller
           $result =  $sp1; 
           return response()->json($result);
     }
+
+    public function getDetailMedi($id){
+        $medi = Medicament::find($id);
+        return [$medi];
+    }
 }

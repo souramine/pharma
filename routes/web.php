@@ -29,6 +29,7 @@ Route::resource('medicaments','MedicamentController')->middleware('auth');
 Route::post('/medicaments/delete/{id}','MedicamentController@destroy')->middleware('auth');
 Route::post('/addMedicaments','MedicamentController@store')->name('addMedicaments')->middleware('auth');
 Route::post('/medicament','MedicamentController@getMedicamentNom')->middleware('auth');
+Route::get('/detail/medi/{id}','MedicamentController@getDetailMedi')->name('detailL')->middleware('auth');
 
 //--------------------------------------Achat ----------------------------------------------
 Route::resource('achats','LotController')->middleware('auth');

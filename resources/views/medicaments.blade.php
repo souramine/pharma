@@ -82,7 +82,7 @@
                         {{$m->voie}}
                       </td>
                       <td class="project-actions text-right">
-                          <span class="btn btn-primary btn-sm" style="cursor: pointer;">
+                          <span class="btn btn-primary btn-sm" onclick="afficheDetail({{$m->id}})" style="cursor: pointer;">
                               <i class="fas fa-folder">
                               </i>
                               Détail
@@ -166,7 +166,7 @@
                   <option value="Canceled">Solution</option>
                   <option value="Success">Comprimer</option>
                 </select>
-              </div><br>
+              </div>
             
 	              <div class="form-group form-inline">
 		                <label for="">Dosage&nbsp;</label> 
@@ -226,6 +226,87 @@
       </div>
       <!-- /.modal -->
   </form>
+
+  <div class="modal fade" id="modal-detail">
+        <div class="modal-dialog modal-default">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Détail Médicament</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+              <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Détail</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                <label for="">Nom du produit</label>
+                <input type="text" name="" id="nom"  disabled class="form-control">
+              </div>
+              <div class="form-group" >
+                <label for="">Famille</label>
+                <input type="text" name="" id="famille"  disabled class="form-control">
+              </div>
+               <div class="form-group" id="">
+                <label for="">Voie</label>
+                <input type="text" name="" id="voie"  disabled class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="">Forme</label>
+                 <input type="text" name="" id="forme_detail"  disabled class="form-control">
+              </div>
+            
+                <div class="form-group form-inline">
+                    <label for="">Dosage&nbsp;</label> 
+                    <input type="text" name="" style="text-align: center" id="dosage" disabled class="form-control col-md-4">  
+                    <label for="">&nbsp;&nbsp;&nbsp;Unité&nbsp;</label>
+                    
+                 <input type="text" name="" style="text-align: center" id="unite" disabled class="form-control col-md-5">  
+                </div>
+  
+              
+               <div class="form-group form-inline" id="vol_detail">
+                    <label for="">Volume</label> 
+                    <input type="text" name="" style="text-align: center" id="volume" disabled class="form-control col-md-4">  
+                    <label for="">&nbsp;&nbsp;&nbsp;Unité&nbsp;</label>
+                     <input type="text" name="" style="text-align: center" id="unite_volume" disabled class="form-control col-md-5"> 
+                   
+                </div>
+                <div class="form-group" id="sol_detail">
+                <label for="">Solvant</label>
+                 <input type="text" name="" id="solvant"  disabled class="form-control">
+              </div>
+              
+              
+
+              
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        
+            </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-secondary"  data-dismiss="modal">Quitter</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 @stop
 
 @section('css')
@@ -333,5 +414,48 @@
       }
     })
       }
+
+     function afficheDetail(id){
+        $.ajax({
+                    url: "/detail/medi/"+id,
+                    method : "get",   
+                    data: {
+                    "_token": "{{ csrf_token() }}"
+                    } ,        
+                    success: function(data){   
+                      var myModal = $('#modal-detail');
+                        document.getElementById('nom').value = Object.values(data[0])[1];
+                        document.getElementById('famille').value = Object.values(data[0])[8];
+                        document.getElementById('voie').value = Object.values(data[0])[9] ;
+                        document.getElementById('forme_detail').value = Object.values(data[0])[4] ;
+                        document.getElementById('dosage').value = Object.values(data[0])[2] ;
+                        document.getElementById('unite').value = Object.values(data[0])[3] ;
+                         if (Object.values(data[0])[4] != 'Poudre') {
+                           document.getElementById('vol_detail').hidden =true;
+                           document.getElementById('sol_detail').hidden =true;
+                         } else{
+                          document.getElementById('vol_detail').hidden =false;
+                           document.getElementById('sol_detail').hidden =false;
+                           document.getElementById('volume').value = Object.values(data[0])[6] ;
+                        document.getElementById('unite_volume').value = Object.values(data[0])[7] ;
+                        document.getElementById('solvant').value = Object.values(data[0])[5] ;
+                         }
+                        
+
+                        
+
+                        myModal.modal({ show: true });        
+                                
+                    },
+                    error: function(data){
+                        Swal.fire({
+                          type: 'error',
+                          title: 'Oops...',
+                          text: 'Quelque chose a mal tourné!'
+                        })
+                      }
+                  });
+
+     }
   </script>
 @stop
