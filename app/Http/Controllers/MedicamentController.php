@@ -118,4 +118,6 @@ class MedicamentController extends Controller
         $medi = Medicament::find($id);
         return [$medi];
     }
+
+    
 }

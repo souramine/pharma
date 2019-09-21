@@ -111,4 +111,9 @@ class LotController extends Controller
         $medicament = Medicament::find($lot->medicament_id);
         return [$lot,$fournisseur,$medicament,$pharmacien];
     }
+
+    public function getMedihome(){
+       $lots = Lot::all();
+        return view('homme.index',compact('lots'));
+    }
 }
