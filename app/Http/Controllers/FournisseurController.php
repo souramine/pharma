@@ -67,9 +67,17 @@ class FournisseurController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $fournisseur = Fournisseur::find($request->input('id'));
+        $fournisseur->name = strtoupper($request->input('name_modif'));
+        $fournisseur->mail = $request->input('mail_modif');
+        $fournisseur->numero_tel = $request->input('numero_modif');
+        $fournisseur->naissance = $request->input('naissance_modif');
+        $fournisseur->numero_reg = $request->input('numero_reg_modif');
+        $fournisseur->save();
+
+        return redirect('fournisseur')->with('message2','Fournisseur modifier');
     }
 
     /**
@@ -130,5 +138,11 @@ class FournisseurController extends Controller
             }
         }
         return view('details.fournisseur',compact('fourniseur','list_achats','nbrAchat_month','nbrAchat_subbMonth','prix_month','prix_subMonth'));
+    }
+
+
+    public function getFournisseur($id){
+        $fourniseur = Fournisseur::find($id);
+        return [$fourniseur];
     }
 }

@@ -21,6 +21,8 @@ Route::get('/detail/pharmacien/{id}','PharmacienController@getDetailPharmacien')
 Route::resource('fournisseur','FournisseurController')->middleware('auth');
 Route::post('/fournisseur/delete/{id}','FournisseurController@destroy')->middleware('auth');
 Route::post('/addFournisseur','FournisseurController@store')->name('addFournisseur')->middleware('auth');
+Route::post('/getFournisseur/{id}','FournisseurController@getFournisseur')->name('getFournisseur')->middleware('auth');
+Route::post('/modifFournisseur','FournisseurController@edit')->name('modifFournisseur')->middleware('auth');
 Route::post('/fournisseur','FournisseurController@getFournisseurNom')->middleware('auth');
 Route::get('/detail/fournisseur/{id}','FournisseurController@getDetailFournisseur')->name('detailF')->middleware('auth');
 
