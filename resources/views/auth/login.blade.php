@@ -246,9 +246,9 @@ form button:hover {
 
 
 <div class="wrapper">
+      
     <div class="container">
         <h1>Bienvenue</h1>
-        
         <form method="POST" action="{{ route('login') }}">
                         @csrf
             <input type="email" placeholder="Adresse e-mail" id="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required autocomplete="email">

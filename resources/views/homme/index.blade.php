@@ -58,7 +58,7 @@
 				          <li class="menu-active"><a href="#home">Home</a></li>
 				          <li><a href="#medi">Médicament</a></li>
 				          <li><a href="#lol">Heure d'ouverture </a></li>		          	          
-				          <li><a href="{{route('login')}}">Login</a></li>				          	          
+				          <li><a href="{{route('testLogin')}}">Login</a></li>				          	          
 				          <li><a href="#contact">Contact</a></li>
 				        </ul>
 				      </nav><!-- #nav-menu-container -->
@@ -78,9 +78,9 @@
 				<div class="container">
 					<div class="row fullscreen d-flex justify-content-center align-items-center">
 						<div class="banner-content col-lg-9 col-md-12 justify-content-center">
-							<h6 class="text-uppercase">Don’t look further, This is your Dentist</h6>
+							<h6 class="text-uppercase">Ne cherchez plus, c’est votre pharmacie</h6>
 							<h1>
-								Authentic Dental Service			
+								PHARMACIE SALIM AMINE			
 							</h1>
 							<p class="text-white mx-auto">
 								If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each. You may be saying to yourself.
@@ -598,6 +598,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         "autoWidth": false,
       });
     });
+
+
   </script>
 		</body>
 	</html>

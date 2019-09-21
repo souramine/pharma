@@ -47,7 +47,7 @@ Route::get('/detail/vente/{id}','VenteController@afficheDetail')->name('detailV'
 
 //--------------------------------------Dashboard ----------------------------------------------
 Route::resource('dash','DashController')->middleware('auth');
-Route::resource('/','DashController')->middleware('auth');
+
 
 //--------------------------------------Profil -------------------------------------------------
 Route::resource('profile','ProfilController')->middleware('auth');
@@ -60,4 +60,14 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/', 'LotController@getMedihome');
+Route::get('/', 'LotController@getMedihome')->name('homme');
+
+
+Route::get('/test',function () {
+    if (auth()->check()) {
+		return redirect('dash');
+	}
+	else{
+		return redirect('login');
+	}
+})->name('testLogin');
